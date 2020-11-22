@@ -1,8 +1,9 @@
-import logger from ('morgan');
-import express from ('express');
-import cookieParser from ('cookie-parser');
-import createError from ('http-errors');
-import indexRouter from ("../routes");
+import logger from 'morgan';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import createError from 'http-errors';
+import indexRouter from "../routes";
+import path from 'path'
 
 export default async ({ app }) => {
 
@@ -10,16 +11,16 @@ export default async ({ app }) => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(cookieParser());
-    app.use(express.static(path.join(__dirname, 'public')));
-
+    app.use(express.static(path.join(__dirname, '../public')));
+    
+    //  Include the router
+    app.use("/", indexRouter);
+    
     // catch 404 and forward to error handler
     app.use(function (req, res, next) {
         next(createError(404));
     });
-
-    //  Include the router
-    app.use("/", indexRouter);
-
+    
     // error handler
     app.use(function (err, req, res, next) {
         // set locals, only providing error in development
@@ -28,7 +29,7 @@ export default async ({ app }) => {
 
         // render the error page
         res.status(err.status || 500);
-        res.render('error');
+        res.json({'error': err.message});
     });
 
     return app;

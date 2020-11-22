@@ -1,33 +1,29 @@
-#!/usr/bin/env node
+import express from 'express';
+import http from 'http';
+import debugLib from 'debug';
+import loaders from './loaders'
 
-/**
- * Module dependencies.
- */
-
-var app = require('../app');
-var debug = require('debug')('backend:server');
-var http = require('http');
-
-/**
- * Get port from environment and store in Express.
- */
-
+const debug = debugLib('backend:server');
 var port = normalizePort(process.env.PORT || '8000');
-app.set('port', port);
 
-/**
- * Create HTTP server.
- */
+async function startserver() {
+  const app = express();
+  app.set('port', port);
+  
+  await loaders({ expressApp: app })
 
-var server = http.createServer(app);
+  var server = http.createServer(app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', () => {
+    var addr = server.address();
+    var bind = typeof addr === 'string'
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
+    debug('Listening on ' + bind);
+  });
+}
 
 /**
  * Normalize a port into a number, string, or false.
@@ -78,13 +74,6 @@ function onError(error) {
 }
 
 /**
- * Event listener for HTTP server "listening" event.
+ * Start the server.
  */
-
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
-}
+startserver();

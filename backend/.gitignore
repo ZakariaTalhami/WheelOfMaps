@@ -18,6 +18,7 @@ tmp
 
 #Build
 .nyc_output/*
+dist-server/*
 
 # API keys and secrets
 .env
