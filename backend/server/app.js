@@ -1,27 +1,26 @@
-import express from 'express';
-import http from 'http';
-import debugLib from 'debug';
-import loaders from './loaders'
+import express from "express";
+import http from "http";
+import debugLib from "debug";
+import loaders from "./loaders";
 
-const debug = debugLib('backend:server');
-var port = normalizePort(process.env.PORT || '8000');
+const debug = debugLib("backend:server");
+const PORT = normalizePort(process.env.PORT || "8000");
 
 async function startserver() {
   const app = express();
-  app.set('port', port);
-  
-  await loaders({ expressApp: app })
+  app.set("port", PORT);
 
-  var server = http.createServer(app);
+  await loaders({ expressApp: app });
 
-  server.listen(port);
-  server.on('error', onError);
-  server.on('listening', () => {
-    var addr = server.address();
-    var bind = typeof addr === 'string'
-      ? 'pipe ' + addr
-      : 'port ' + addr.port;
-    debug('Listening on ' + bind);
+  const server = http.createServer(app);
+
+  server.listen(PORT);
+  server.on("error", onError);
+  server.on("listening", () => {
+    const addr = server.address();
+    const bind =
+      typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
+    debug(`Listening on ${bind}`);
   });
 }
 
@@ -30,9 +29,9 @@ async function startserver() {
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
-  if (isNaN(port)) {
+  if (Number.isNaN(port)) {
     // named pipe
     return val;
   }
@@ -50,22 +49,20 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
+  if (error.syscall !== "listen") {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof PORT === "string" ? `Pipe ${PORT}` : `Port ${PORT}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+    case "EACCES":
+      console.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+    case "EADDRINUSE":
+      console.error(`${bind}  is already in use`);
       process.exit(1);
       break;
     default:
