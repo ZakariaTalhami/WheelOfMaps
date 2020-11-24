@@ -1,5 +1,9 @@
+import Main from "./views/main/Main";
+
 function App() {
-  return <div className="App">This is made blank</div>;
+  return <div className="App">
+    <Main/>
+  </div>;
 }
 
 export default App;
