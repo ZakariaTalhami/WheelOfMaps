@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd backend && npm run watch:dev\" \"cd frontend && npm start\""
+    "start": "concurrently \"npm run frontend:dev\" \"cd npm backend:dev\"",
+    "frontend:dev": "cd frontend && npm run start",
+    "backend:dev": "cd backend && npm run watch:dev"
   },
   "author": "",
   "license": "ISC",
