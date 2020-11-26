@@ -2,6 +2,7 @@ import React from "react";
 import SideMenu from "../../components/sideMenu/SideMenu";
 import classes from "./Main.module.scss";
 import Timeline from "./timeline/Timeline";
+import { ReactComponent as WotIcon } from "../../assets/icons/Wheel-icon.svg";
 
 const Main = () => {
   const testString =
@@ -22,6 +23,21 @@ const Main = () => {
               textIndent: "2rem",
             }}
           >
+            {/* TODO: Temp components this will be injected from other sources */}
+            <div
+              style={{
+                textAlign: "center",
+              }}
+            >
+              <WotIcon />
+            </div>
+            <h1
+              style={{
+                textAlign: "center",
+              }}
+            >
+              Chapter 1
+            </h1>
             {testString.split("\n\n").map((t, index) => (
               <p key={`p_${index}`}>{t}</p>
             ))}

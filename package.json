@@ -17,11 +17,11 @@
     "prettier": "^2.2.0"
   },
   "lint-staged": {
-    "frontend/src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "frontend/src/**/*.{js,jsx,ts,tsx,json,md}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "backend/server/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "backend/server/**/*.{js,jsx,ts,tsx,json,md}": [
       "eslint --fix",
       "prettier --write"
     ]

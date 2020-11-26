@@ -1,0 +1,38 @@
+@import "../../assets/colors";
+
+.dropDownMenuContainer {
+    position: relative;
+    display : inline-block;
+
+    .dropDownMenu {
+        position        : absolute;
+        bottom          : 110%;
+        width           : max-content;
+        display         : none;
+        background-color: $primary-color;
+        color           : $primary-color-dark;
+        border-radius   : 5px;
+        overflow        : auto;
+
+        &.open {
+            display: block;
+        }
+        .menuItem {
+            padding   : 0.3rem 0.5rem;
+            transition: all 0.2s;
+
+            &:hover {
+                color           : $primary-color;
+                background-color: $primary-color-dark;
+            }
+
+            &:last-child:hover {
+                border-radius: 0 0 5px 5px;
+            }
+
+            &:first-child:hover {
+                border-radius: 5px 5px 0 0;
+            }
+        }
+    }
+}

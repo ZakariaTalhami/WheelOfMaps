@@ -17,6 +17,7 @@
             width           : 30%;
             max-width       : 600px;
             height          : 100%;
+            // overflow        : auto; // Causes the toggle button to disappear
             z-index         : 100;
             background-color: $primary-color;
             box-shadow      : 4px -4px 10px 10px $shadow-color;

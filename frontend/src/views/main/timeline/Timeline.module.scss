@@ -1,0 +1,30 @@
+@import "../../../assets/colors";
+
+.timeline {
+    display: grid;
+    grid-template-rows: 2.5rem 1fr 2rem;
+
+    .bookCrumbs {
+        display: flex;
+        align-items: center;
+        color: $primary-color;
+
+        font-size: 20px;
+        font-weight: 500;
+
+        .crumb {
+            margin: 0 1rem;
+            user-select: none;
+        }
+
+    }
+
+    .bookNav {
+        display: flex;
+        justify-content: space-between;
+
+        .hideNav {
+            visibility: hidden;
+        }
+    }
+}
