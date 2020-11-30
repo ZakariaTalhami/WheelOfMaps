@@ -17,6 +17,7 @@
             width           : 30%;
             max-width       : 600px;
             height          : 100%;
+            // overflow        : auto; // Causes the toggle button to disappear
             z-index         : 100;
             background-color: $primary-color;
             box-shadow      : 4px -4px 10px 10px $shadow-color;
@@ -26,7 +27,8 @@
             width           : 100%;
             height          : 150px;
             background-color: $neutral-color;
-            box-shadow      : 0px -4px 10px 10px $shadow-color;
+            // box-shadow      : 0px -4px 10px 10px $shadow-color, inset -30px 0px 20px rgba(0, 0, 0, 0.25);
+            box-shadow      :  inset -30px 0px 20px rgba(0, 0, 0, 0.25);
         }
     }
 }

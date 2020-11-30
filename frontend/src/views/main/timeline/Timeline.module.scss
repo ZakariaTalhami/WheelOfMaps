@@ -1,0 +1,82 @@
+@import "../../../assets/colors";
+
+.timeline {
+    display           : grid;
+    grid-template-rows: 2.5rem 1fr 50px;
+    box-shadow        : inset -30px 0px 20px rgba(0, 0, 0, 0.25);
+
+    .bookCrumbs {
+        display    : flex;
+        align-items: center;
+        color      : $primary-color;
+
+        font-size  : 20px;
+        font-weight: 500;
+
+        .crumb {
+            margin     : 0 1rem;
+            user-select: none;
+        }
+
+    }
+
+    .timelineBarContainer {
+        overflow   : hidden;
+        display    : flex;
+        align-items: center;
+
+        .timelineBarWrapper {
+            padding: 0 50%;
+
+            .timelineBar {
+                position        : relative;
+                height          : 1rem;
+                background-color: $secondary-color;
+                box-shadow      : 0px 4px 4px rgba(0, 0, 0, 0.25), -4px -4px 4px rgba(0, 0, 0, 0.25);
+
+                .marker {
+                    position           : absolute;
+                    width              : 2rem;
+                    height             : 2rem;
+                    // background-color: lawngreen;
+                    transform          : translate(-50%, -25%);
+                    display            : flex;
+                    align-items        : center;
+                    justify-content    : center;
+                    cursor             : pointer;
+                }
+            }
+        }
+    }
+
+    .bookNav {
+        display        : flex;
+        justify-content: space-between;
+        align-items    : center;
+        padding: 0 0.5rem;
+
+        .navButton {
+            background: none;
+            border    : none;
+            color     : $primary-color;
+            font-size : 32px;
+            cursor    : pointer;
+
+            &:hover {
+                color: $primary-color-dark;
+            }
+            
+            &:active {
+                color: $primary-color-light;
+            }
+
+            &:focus {
+                outline: none;
+            }
+
+            &.hideNav {
+                visibility: hidden;
+            }
+        }
+    }
+}
