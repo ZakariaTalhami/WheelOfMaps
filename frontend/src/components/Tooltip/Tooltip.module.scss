@@ -1,0 +1,13 @@
+@import "../../assets/colors";
+
+.tooltip {
+    color           : $neutral-color;
+    background-color: $primary-color-dark !important;
+    font-size       : 16px !important;
+
+    &:global(.place-top) {
+        &:after {
+            border-top-color: $primary-color-dark !important;
+        }
+    }
+}
