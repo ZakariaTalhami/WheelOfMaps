@@ -3,6 +3,7 @@ import SideMenu from "../../components/sideMenu/SideMenu";
 import classes from "./Main.module.scss";
 import Timeline from "./timeline/Timeline";
 import { ReactComponent as WotIcon } from "../../assets/icons/Wheel-icon.svg";
+import Map from "../map/Map";
 
 const Main = () => {
   const testString =
@@ -12,6 +13,7 @@ const Main = () => {
 
   return (
     <div className={classes.mainContainer}>
+      <Map />
       <div className={classes.overlay}>
         <SideMenu className={classes.slider}>
           <div

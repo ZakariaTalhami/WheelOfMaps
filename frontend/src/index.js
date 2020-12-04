@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import StoreProvider from "./store";
 import "./index.scss";
 import "./assets/fonts/style.css";
+import "leaflet/dist/leaflet.css";
 
 ReactDOM.render(
   <React.StrictMode>
