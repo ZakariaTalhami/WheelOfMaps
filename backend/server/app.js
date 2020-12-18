@@ -2,6 +2,11 @@ import express from "express";
 import http from "http";
 import debugLib from "debug";
 import loaders from "./loaders";
+import dotenv from "dotenv";
+import path from "path";
+
+// Setup the enviroment varibles from ../.env
+dotenv.config({ path: path.join(__dirname, "../.env") });
 
 const debug = debugLib("backend:server");
 const PORT = normalizePort(process.env.PORT || "8000");
@@ -11,7 +16,7 @@ async function startserver() {
   app.set("port", PORT);
 
   await loaders({ expressApp: app });
-
+  // console.log(app._router.stack);
   const server = http.createServer(app);
 
   server.listen(PORT);

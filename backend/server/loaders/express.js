@@ -4,12 +4,14 @@ import cookieParser from "cookie-parser";
 import createError from "http-errors";
 import path from "path";
 import indexRouter from "../routes";
-
+import bodyParser from "body-parser";
+import { errors } from "celebrate";
 export default async ({ app }) => {
   app.use(logger("dev"));
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
+  app.use(bodyParser.json());
   app.use(express.static(path.join(__dirname, "../../public")));
 
   //  Include the router
@@ -19,6 +21,9 @@ export default async ({ app }) => {
   app.use((req, res, next) => {
     next(createError(404));
   });
+
+  // Catch Celebrate Validation Errors
+  app.use(errors());
 
   // error handler
   app.use((err, req, res) => {
