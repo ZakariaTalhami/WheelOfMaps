@@ -48,13 +48,15 @@ export const updateModelAPIHandler = (model, lookUpKey) => async (req, res) => {
     const objId = req.params[lookUpKey];
     const objDto = req.body;
     try {
-        const obj = await model.findOneAndUpdate({ _id: objId }, objDto);
+        const obj = await model.findOneAndReplace({ _id: objId }, objDto, {
+            new: true,
+        });
         res.json(obj);
     } catch (error) {
         console.log(error);
         res.status(500);
         res.json({
-            message: "Failed to create" + model.modelName,
+            message: "Failed to update " + model.modelName,
             error,
         });
     }
