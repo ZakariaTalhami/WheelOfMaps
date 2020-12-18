@@ -26,6 +26,9 @@
       "prettier --write"
     ]
   },
+  "prettier": {
+    "tabWidth": 4
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
