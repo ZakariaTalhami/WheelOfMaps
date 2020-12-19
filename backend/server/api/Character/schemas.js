@@ -29,4 +29,12 @@ const CharacterSchema = new Schema({
     },
 });
 
+CharacterSchema.statics.addPosition = function (characterId, position) {
+    return this.findOneAndUpdate(
+        { _id: characterId },
+        { $push: { position: position } },
+        { new: true }
+    );
+};
+
 export const Character = model("Character", CharacterSchema);

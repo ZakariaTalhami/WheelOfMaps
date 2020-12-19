@@ -5,6 +5,7 @@ import {
     CHAPTER_IDNEX_REGEX,
 } from "../../utils/Constants";
 import {
+    AddPosition,
     CreateCharacter,
     DeleteCharacter,
     FetchCharacter,
@@ -17,15 +18,16 @@ import { skipMethod } from "../../utils/MiddlewareUtils";
 const router = Router();
 
 // Validation Middleware
+const positionValidationObj = Joi.object({
+    chapterRange: Joi.string().pattern(CHAPTER_IDNEX_RANGE_REGEX),
+    position: Joi.array().items(Joi.number()).length(2).required(),
+});
+
+const positionValidationMiddleware = celebrate({ body: positionValidationObj });
 const characterValidationMiddleware = celebrate({
     body: Joi.object({
         name: Joi.string().required(),
-        position: Joi.array().items(
-            Joi.object({
-                chapterRange: Joi.string().pattern(CHAPTER_IDNEX_RANGE_REGEX),
-                position: Joi.array().items(Joi.number()).length(2).required(),
-            })
-        ),
+        position: Joi.array().items(positionValidationObj),
         chapterSummary: Joi.object().pattern(CHAPTER_IDNEX_REGEX, Joi.string()),
     }),
 });
@@ -46,5 +48,10 @@ router
     .get(FetchCharacter)
     .put(UpdateCharacter)
     .delete(DeleteCharacter);
+
+router
+    .route("/:characterId/position")
+    .all(positionValidationMiddleware)
+    .post(AddPosition);
 
 export default router;
