@@ -23,4 +23,12 @@ const LocationSchema = new Schema({
     ],
 });
 
+LocationSchema.statics.addDescription = function (locationId, description) {
+    return this.findOneAndUpdate(
+        { _id: locationId },
+        { $push: { description: description } },
+        { new: true }
+    );
+};
+
 export const Location = model("Location", LocationSchema);
