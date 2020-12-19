@@ -27,3 +27,27 @@ export const AddPosition = async (req, res) => {
         });
     }
 };
+
+export const AddChapterSummary = async (req, res) => {
+    const characterId = req.params.characterId;
+    const chapter = req.body.chapter;
+    const summary = req.body.summary;
+    try {
+        const character = await Character.addChapterSummary(
+            characterId,
+            chapter,
+            summary
+        );
+        res.json(character);
+    } catch (error) {
+        console.log(error);
+        res.status(500);
+        res.json({
+            message:
+                "Failed to add chapter summary to " +
+                characterId +
+                " character",
+            error,
+        });
+    }
+};

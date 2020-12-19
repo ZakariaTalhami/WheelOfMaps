@@ -29,10 +29,24 @@ const CharacterSchema = new Schema({
     },
 });
 
+// Add a new position of the character
 CharacterSchema.statics.addPosition = function (characterId, position) {
     return this.findOneAndUpdate(
         { _id: characterId },
         { $push: { position: position } },
+        { new: true }
+    );
+};
+
+// Add a chapter summary to the character
+CharacterSchema.statics.addChapterSummary = function (
+    characterId,
+    chapterIndex,
+    summary
+) {
+    return this.findOneAndUpdate(
+        { _id: characterId },
+        { $set: { [`chapterSummary.${chapterIndex}`]: summary } },
         { new: true }
     );
 };

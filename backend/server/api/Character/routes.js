@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { celebrate, Joi } from "celebrate";
+import { celebrate, Joi, Segments } from "celebrate";
 import {
     CHAPTER_IDNEX_RANGE_REGEX,
     CHAPTER_IDNEX_REGEX,
 } from "../../utils/Constants";
 import {
+    AddChapterSummary,
     AddPosition,
     CreateCharacter,
     DeleteCharacter,
@@ -31,6 +32,12 @@ const characterValidationMiddleware = celebrate({
         chapterSummary: Joi.object().pattern(CHAPTER_IDNEX_REGEX, Joi.string()),
     }),
 });
+const chapterSummaryValidationMiddleware = celebrate({
+    [Segments.BODY]: Joi.object({
+        chapter: Joi.string().pattern(CHAPTER_IDNEX_REGEX).required(),
+        summary: Joi.string().required(),
+    }),
+});
 
 // Routes
 
@@ -53,5 +60,10 @@ router
     .route("/:characterId/position")
     .all(positionValidationMiddleware)
     .post(AddPosition);
+
+router
+    .route("/:characterId/chapter-summary")
+    .all(chapterSummaryValidationMiddleware)
+    .post(AddChapterSummary);
 
 export default router;
