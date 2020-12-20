@@ -6,35 +6,38 @@ import path from "path";
 import indexRouter from "../routes";
 import bodyParser from "body-parser";
 import { errors } from "celebrate";
+import cors from "cors";
+
 export default async ({ app }) => {
-  app.use(logger("dev"));
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
-  app.use(cookieParser());
-  app.use(bodyParser.json());
-  app.use(express.static(path.join(__dirname, "../../public")));
+    app.use(logger("dev"));
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: false }));
+    app.use(cookieParser());
+    app.use(cors());
+    app.use(bodyParser.json());
+    app.use(express.static(path.join(__dirname, "../../public")));
 
-  //  Include the router
-  app.use("/", indexRouter);
+    //  Include the router
+    app.use("/", indexRouter);
 
-  // catch 404 and forward to error handler
-  app.use((req, res, next) => {
-    next(createError(404));
-  });
+    // catch 404 and forward to error handler
+    app.use((req, res, next) => {
+        next(createError(404));
+    });
 
-  // Catch Celebrate Validation Errors
-  app.use(errors());
+    // Catch Celebrate Validation Errors
+    app.use(errors());
 
-  // error handler
-  app.use((err, req, res) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get("env") === "development" ? err : {};
+    // error handler
+    app.use((err, req, res) => {
+        // set locals, only providing error in development
+        res.locals.message = err.message;
+        res.locals.error = req.app.get("env") === "development" ? err : {};
 
-    // render the error page
-    res.status(err.status || 500);
-    res.json({ error: err.message });
-  });
+        // render the error page
+        res.status(err.status || 500);
+        res.json({ error: err.message });
+    });
 
-  return app;
+    return app;
 };

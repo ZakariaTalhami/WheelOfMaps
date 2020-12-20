@@ -1,0 +1,48 @@
+@import "../../assets/colors";
+
+.loadingScreen {
+    position  : fixed;
+    width     : 100vw;
+    height    : 100vh;
+    background: radial-gradient(50% 50% at 50% 50%, #9399A5 0%, #70798C 100%);
+
+    .loadingIcon {
+        display  : inline-block;
+        position : absolute;
+        left     : 50%;
+        top      : 50%;
+        transform: translate(-50%, -50%);
+
+        svg {
+            animation: iconLoading 2s infinite ease-in-out;
+        }
+
+        @keyframes iconLoading {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    .loadingText {
+        position   : relative;
+        top        : 70%;
+        font-size  : 32px;
+        font-weight: bold;
+        text-align : center;
+
+        svg {
+            width: 215;
+
+            text {
+                fill: $neutral-color;
+            }
+        }
+    }
+}

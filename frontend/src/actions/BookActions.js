@@ -1,12 +1,25 @@
-import { BOOK_SELECTED, CHAPTER_SELECTED } from "./types";
+import axios from "axios";
+import { BOOK_SELECTED, CHAPTER_SELECTED, BOOKS_LOADED } from "./types";
 
 export const setSelectedBook = (bookTitle) => ({
-  type: BOOK_SELECTED,
-  book: bookTitle,
+    type: BOOK_SELECTED,
+    book: bookTitle,
 });
 
 export const setSelectedChapter = (chapterName, chapterIndex) => ({
-  type: CHAPTER_SELECTED,
-  chapter: chapterName,
-  index: chapterIndex,
+    type: CHAPTER_SELECTED,
+    chapter: chapterName,
+    index: chapterIndex,
 });
+
+export const loadBooks = () => (dispatch) => {
+    return axios
+        .get("book")
+        .then((res) => res.data)
+        .then((data) => {
+            dispatch({
+                type: BOOKS_LOADED,
+                books: data,
+            });
+        });
+};
