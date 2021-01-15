@@ -15,8 +15,12 @@ const router = Router();
 
 // Validation Middleware
 const chapterValidationObj = Joi.object({
-    number: Joi.number().integer().min(1).required(),
+    // TODO: When the Prologue is handled this
+    // should be a set with min of 1
+    number: Joi.number().integer().required(),
     title: Joi.string().required(),
+    // TODO: this shouldnt be set by the user
+    chapterIndex: Joi.string().required(),
 });
 
 const chapterValidationMiddleware = celebrate({

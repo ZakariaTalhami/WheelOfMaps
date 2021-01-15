@@ -1,18 +1,25 @@
+// React and utils
 import React, { useEffect, useRef } from "react";
 import classes from "./Timeline.module.scss";
 import cs from "classnames";
-import { useDispatch, useSelector } from "react-redux";
-import DropDownMenu from "../../../components/dropdownMenu/DropDownMenu";
+import { getBookChapterTitles } from "../../../utils/BookUtils";
+
+// Redux Actions
 import {
     setSelectedBook,
     setSelectedChapter,
 } from "../../../actions/BookActions";
 
+// Components
 import { ReactComponent as TimePoint } from "../../../assets/icons/TimePoint.svg";
 import { ReactComponent as TimePointActive } from "../../../assets/icons/TimePointActive.svg";
-import useScrollToElement from "../../../hooks/useScrollToElement";
+import DropDownMenu from "../../../components/dropdownMenu/DropDownMenu";
 import Tooltip from "../../../components/Tooltip/Tooltip";
 import ReactTooltip from "react-tooltip";
+
+// Hooks
+import { useDispatch, useSelector } from "react-redux";
+import useScrollToElement from "../../../hooks/useScrollToElement";
 import useHorizontalScroll from "../../../hooks/useHorizontalScroll";
 import useMouseDragScroll from "../../../hooks/useMouseDragScroll";
 
@@ -82,7 +89,8 @@ const Timeline = ({ className }) => {
 };
 
 const BookChapterBreadCrumb = ({ books, selectedBook, selectedChapter }) => {
-    const chapters = books[selectedBook].chapters.map((c) => c.title);
+    const chapters = getBookChapterTitles(books[selectedBook]);
+
     const dispatch = useDispatch();
 
     const handleChapterChange = (chapter, index) => {
@@ -125,7 +133,7 @@ const BookChapterBreadCrumb = ({ books, selectedBook, selectedChapter }) => {
 };
 
 const TimelineBar = ({ books, selectedBook, selectedChapter, spacing }) => {
-    const chapters = books[selectedBook].chapters.map((c) => c.title);
+    const chapters = getBookChapterTitles(books[selectedBook]);
     const barLength = spacing * (chapters.length - 1);
     const dispatch = useDispatch();
     const activeElementRef = useScrollToElement([
@@ -142,7 +150,7 @@ const TimelineBar = ({ books, selectedBook, selectedChapter, spacing }) => {
         ReactTooltip.rebuild();
     });
 
-    const PlaceholderMarkers = ({ position, selected, title, ...props }) => {
+    const ChapterMarkers = ({ position, selected, title, ...props }) => {
         return (
             <div
                 className={cs(classes.marker)}
@@ -177,7 +185,7 @@ const TimelineBar = ({ books, selectedBook, selectedChapter, spacing }) => {
                 >
                     {/* TODO: Better key here */}
                     {chapters.map((chapter, index) => (
-                        <PlaceholderMarkers
+                        <ChapterMarkers
                             onClick={() =>
                                 index !== selectedChapter &&
                                 handleSelection(chapter, index)

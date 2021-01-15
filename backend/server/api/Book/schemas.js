@@ -14,6 +14,7 @@ const ChapterSchema = new Schema({
     },
 });
 
+// TODO: Check why this is not triggered
 ChapterSchema.pre("save", function (next) {
     const book = this.parent();
     this.chapterIndex = `${zeroPad(book.seriesIndex, 2)}${zeroPad(

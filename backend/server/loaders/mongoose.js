@@ -10,6 +10,7 @@ export default async () => {
             useCreateIndex: true,
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            useFindAndModify: false,
             dbName: "wheelofmaps",
             user: process.env.DB_USER,
             pass: process.env.DB_PASSWORD,
