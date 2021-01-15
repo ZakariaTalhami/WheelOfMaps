@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import StoreProvider from "./store";
-import { configureAxios } from "./axiosSetup";
+import { configureAxios } from "./API/axiosSetup";
 import "./index.scss";
 import "./assets/fonts/style.css";
 import "leaflet/dist/leaflet.css";

@@ -3,6 +3,7 @@ import {
     BOOK_SELECTED,
     CHAPTER_SELECTED,
 } from "../actions/types";
+import _ from "lodash";
 
 const mockState = {
     books: {
@@ -24,8 +25,23 @@ const mockState = {
             "Chapter 7",
         ],
     },
-    selectedBook: "Eye of the world",
-    selectedChapter: 1,
+    selectedBook: undefined,
+    selectedChapter: undefined,
+};
+
+const rawBookHandler = (books) => {
+    const rawBooksData = {};
+    if (_.isArray(books)) {
+        _.each(books, (bookData) => {
+            rawBooksData[bookData.title] = bookData;
+        });
+    }
+    return rawBooksData;
+};
+
+const getFirstBook = (books) => {
+    const firstBook = _.first(books);
+    return firstBook ? firstBook.title : undefined;
 };
 
 const BookReducer = (state = mockState, action) => {
@@ -46,7 +62,9 @@ const BookReducer = (state = mockState, action) => {
         case BOOKS_LOADED:
             return {
                 ...state,
-                booksRaw: action.books,
+                books: rawBookHandler(action.books),
+                selectedBook: getFirstBook(action.books),
+                selectedChapter: 0,
             };
         default:
             return state;
