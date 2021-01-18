@@ -10,6 +10,7 @@ import {
     UpdateLocation,
 } from "./controllers";
 import { skipMethod } from "../../utils/MiddlewareUtils";
+import { markerValidationObj } from "../common/MarkerModel";
 
 // Create the express Router
 const router = Router();
@@ -28,6 +29,7 @@ const locationValidationMiddleware = celebrate({
         name: Joi.string().required(),
         position: Joi.array().items(Joi.number()).length(2).required(),
         description: Joi.array().items(descriptionValidationObj),
+        marker: markerValidationObj,
     }),
 });
 

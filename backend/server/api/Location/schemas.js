@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import { CHAPTER_RANGE_SCHEMA } from "../../utils/Constants";
+import MarkerModel from "../common/MarkerModel";
 
 const LocationSchema = new Schema({
     name: {
@@ -22,6 +23,8 @@ const LocationSchema = new Schema({
         }),
     ],
 });
+
+LocationSchema.plugin(MarkerModel);
 
 LocationSchema.statics.addDescription = function (locationId, description) {
     return this.findOneAndUpdate(
