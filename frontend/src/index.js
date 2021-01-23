@@ -7,6 +7,7 @@ import { configureAxios } from "./API/axiosSetup";
 import "./index.scss";
 import "./assets/fonts/style.css";
 import "leaflet/dist/leaflet.css";
+import "./assets/_leafletjs.override.scss";
 
 configureAxios();
 

@@ -1,0 +1,31 @@
+@import "./colors";
+
+.leaflet-tooltip {
+    // position           : absolute;
+    font-size          : 16px;
+    font-weight        : bold;
+    padding            : 0.3rem 1rem;
+    background-color   : adjust-color($neutral-color, $alpha: -0.2);
+    border-radius      : 7px;
+    border             : none;
+    color              : $primary-color;
+    white-space        : nowrap;
+    -webkit-user-select: none;
+    -moz-user-select   : none;
+    -ms-user-select    : none;
+    user-select        : none;
+    pointer-events     : none;
+    box-shadow         : -3px 1px 5px rgba(0, 0, 0, 0.4);
+
+    &.leaflet-tooltip-left:before {
+        right            : 0;
+        margin-right     : -12px;
+        border-left-color: adjust-color($neutral-color, $alpha: -0.2);
+    }
+
+    &.leaflet-tooltip-right:before {
+        left              : 0;
+        margin-left       : -12px;
+        border-right-color: adjust-color($neutral-color, $alpha: -0.2);
+    }
+}

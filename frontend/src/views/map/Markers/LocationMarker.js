@@ -1,5 +1,5 @@
 import React from "react";
-import { Marker } from "react-leaflet";
+import { Marker, Tooltip } from "react-leaflet";
 import L from "leaflet";
 
 const LocationMarker = (props) => {
@@ -11,7 +11,13 @@ const LocationMarker = (props) => {
         iconAnchor: props.marker.anchor, // point of the icon which will correspond to marker's location
     });
 
-    return <Marker position={props.position} icon={locationIcon}></Marker>;
+    return (
+        <Marker position={props.position} icon={locationIcon}>
+            <Tooltip offset={[props.marker.anchor[0] + 5, 0]}>
+                {props.name}
+            </Tooltip>
+        </Marker>
+    );
 };
 
 export default LocationMarker;
