@@ -19,6 +19,7 @@ const chapterValidationObj = Joi.object({
     // should be a set with min of 1
     number: Joi.number().integer().required(),
     title: Joi.string().required(),
+    summary: Joi.string(),
     // TODO: this shouldnt be set by the user
     chapterIndex: Joi.string().required(),
 });

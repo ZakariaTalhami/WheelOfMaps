@@ -9,6 +9,10 @@ const ChapterSchema = new Schema({
     title: {
         type: String,
     },
+    summary: {
+        type: String,
+        default: "",
+    },
     chapterIndex: {
         type: String,
     },
