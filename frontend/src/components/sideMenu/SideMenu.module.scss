@@ -1,6 +1,8 @@
 @import "../../assets/colors";
 
 .sideMenu {
+    $toggle-margin: 50px; 
+
     position  : relative;
     transition: all 0.5s;
     transform : translateX(-100%);
@@ -41,6 +43,8 @@
     }
 
     .content {
-        margin-top: 50px;
+        height: calc(100% - #{$toggle-margin});
+        margin-top: $toggle-margin;
+        overflow  : auto;
     }
 }
