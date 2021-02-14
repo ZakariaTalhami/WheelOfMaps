@@ -34,6 +34,7 @@ const Timeline = ({ className }) => {
     const handleBack = () => {
         console.log("Back!");
         if (bookState.selectedChapter - 1 > -1) {
+            // Go to the previous chapter
             dispatch(
                 setSelectedChapter(
                     bookState.selectedBook,
@@ -41,6 +42,7 @@ const Timeline = ({ className }) => {
                 )
             );
         } else {
+            // Go to the previous book
             const bookTitles = Object.keys(bookState.books);
             const bookIndex = bookTitles.indexOf(bookState.selectedBook);
             if (bookIndex - 1 < -1) {
@@ -54,8 +56,9 @@ const Timeline = ({ className }) => {
 
         if (
             bookState.selectedChapter + 1 <
-            bookState.books[bookState.selectedBook].length
+            bookState.books[bookState.selectedBook].chapters.length
         ) {
+            // Go to the next chapter
             dispatch(
                 setSelectedChapter(
                     bookState.selectedBook,
@@ -63,6 +66,7 @@ const Timeline = ({ className }) => {
                 )
             );
         } else {
+            // Go to the next book
             const bookTitles = Object.keys(bookState.books);
             const bookIndex = bookTitles.indexOf(bookState.selectedBook);
             if (bookIndex + 1 < bookTitles.length) {
