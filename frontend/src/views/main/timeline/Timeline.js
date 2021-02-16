@@ -180,29 +180,31 @@ const TimelineBar = ({ books, selectedBook, selectedChapter, spacing }) => {
             ref={timelineContainerRef}
             className={classes.timelineBarContainer}
         >
-            <div className={classes.timelineBarWrapper}>
-                <div
-                    className={classes.timelineBar}
-                    style={{
-                        width: `${barLength}px`,
-                    }}
-                >
-                    {/* TODO: Better key here */}
-                    {chapters.map((chapter, index) => (
-                        <ChapterMarkers
-                            onClick={() =>
-                                index !== selectedChapter &&
-                                handleSelection(chapter, index)
-                            }
-                            selected={index === selectedChapter}
-                            key={`chapter_${index}`}
-                            title={chapter}
-                            position={index * spacing}
-                        />
-                    ))}
+            {chapters.length > 0 && (
+                <div className={classes.timelineBarWrapper}>
+                    <div
+                        className={classes.timelineBar}
+                        style={{
+                            width: `${barLength}px`,
+                        }}
+                    >
+                        {/* TODO: Better key here */}
+                        {chapters.map((chapter, index) => (
+                            <ChapterMarkers
+                                onClick={() =>
+                                    index !== selectedChapter &&
+                                    handleSelection(chapter, index)
+                                }
+                                selected={index === selectedChapter}
+                                key={`chapter_${index}`}
+                                title={chapter}
+                                position={index * spacing}
+                            />
+                        ))}
+                    </div>
+                    <Tooltip effect={"solid"} />
                 </div>
-            </div>
-            <Tooltip effect={"solid"} />
+            )}
         </div>
     );
 };
