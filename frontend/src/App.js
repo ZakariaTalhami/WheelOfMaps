@@ -5,6 +5,11 @@ import { loadBooks } from "./actions/BookActions";
 import { loadCharacters } from "./actions/CharacterActions";
 import { loadLocations } from "./actions/LocationActions";
 import Main from "./views/main/Main";
+import styled from "styled-components";
+
+const AppWrapper = styled.div`
+    height: 100%;
+`;
 
 function App() {
     const [isLoading, setIsloading] = useState(true);
@@ -19,12 +24,7 @@ function App() {
         ]).then(() => setIsloading(false));
     }, []);
 
-    return (
-        <div className="App">
-            {isLoading && <LoadingScreen />}
-            {!isLoading && <Main />}
-        </div>
-    );
+    return <AppWrapper>{isLoading ? <LoadingScreen /> : <Main />}</AppWrapper>;
 }
 
 export default App;
