@@ -5,36 +5,22 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import StoreProvider from "./store";
 import { configureAxios } from "./API/axiosSetup";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 // Components
 import App from "./App";
-// Global Styles
-import resetCSS from "./assets/styles/reset.css";
-import baseStyle from "./assets/styles/baseStyle.scss";
+//Global Theme
+import extendedTheme from "./assets/styles/extendedTheme";
 // TODO: remove custom font icons, replace with react-icons
 import "./assets/fonts/style.css";
 // Leafletjs Styles
 import "leaflet/dist/leaflet.css";
 import "./assets/_leafletjs.override.scss";
 
-const theme = extendTheme({
-    colors: {
-        primaryColor: "#DAD2BC",
-        neutralColor: "#252323",
-    },
-    styles: {
-        global: {
-            ...resetCSS,
-            ...baseStyle,
-        },
-    },
-});
-
 configureAxios();
 
 ReactDOM.render(
     <React.StrictMode>
-        <ChakraProvider theme={theme}>
+        <ChakraProvider theme={extendedTheme}>
             <StoreProvider>
                 <App />
             </StoreProvider>

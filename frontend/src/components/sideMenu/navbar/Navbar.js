@@ -1,6 +1,7 @@
 import { Box, Flex, Icon, Tooltip, VStack } from "@chakra-ui/react";
 import React from "react";
 import PropTypes from "prop-types";
+import { NavigationType } from "../navigation";
 
 const NavbarWraper = (props) => (
     <Flex
@@ -22,9 +23,9 @@ const NavIcon = (props) => (
         bg="neutralColor"
         color="primaryColor"
     >
-        {/* Added a span to fix the forwardRef issue with react-icons */}
+        {/* Added a Box to fix the forwardRef issue with react-icons */}
         <Box
-            borderLeft="4px solid"
+            borderRight="4px solid"
             borderColor={props.isSelected ? "neutralColor" : "transparent"}
             textAlign="center"
             w="100%"
@@ -60,14 +61,7 @@ const Navbar = ({ onSelect, selected, navigation }) => {
 
 Navbar.propTypes = {
     selected: PropTypes.string,
-    navigation: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string,
-            label: PropTypes.string,
-            Icon: PropTypes.elementType,
-            Content: PropTypes.string,
-        })
-    ),
+    navigation: PropTypes.arrayOf(NavigationType),
 };
 
 export default Navbar;
