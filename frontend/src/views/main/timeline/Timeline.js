@@ -1,7 +1,5 @@
 // React and utils
-import React, { useEffect, useRef } from "react";
-import classes from "./Timeline.module.scss";
-import cs from "classnames";
+import React from "react";
 import { getBookChapterTitles } from "../../../utils/BookUtils";
 
 // Redux Actions
@@ -11,25 +9,15 @@ import {
 } from "../../../actions/BookActions";
 
 // Components
-import { ReactComponent as TimePoint } from "../../../assets/icons/TimePoint.svg";
-import { ReactComponent as TimePointActive } from "../../../assets/icons/TimePointActive.svg";
 import DropDownMenu from "../../../components/dropdownMenu/DropDownMenu";
-import Tooltip from "../../../components/Tooltip/Tooltip";
-import ReactTooltip from "react-tooltip";
 
 // Hooks
 import { useDispatch, useSelector } from "react-redux";
-import useScrollToElement from "../../../hooks/useScrollToElement";
-import useHorizontalScroll from "../../../hooks/useHorizontalScroll";
-import useMouseDragScroll from "../../../hooks/useMouseDragScroll";
+import { Box, Flex, Grid, IconButton, Spacer } from "@chakra-ui/react";
 
 const Timeline = ({ className }) => {
     const bookState = useSelector((state) => state.Books);
     const dispatch = useDispatch();
-
-    const handleBookChapterSelectionChange = ({ book, chapter }) => {
-        console.log(book, chapter);
-    };
 
     const handleBack = () => {
         console.log("Back!");
@@ -76,19 +64,22 @@ const Timeline = ({ className }) => {
     };
 
     return (
-        <div className={cs(classes.timeline, className)}>
+        <Grid
+            bgColor="neutralColor"
+            templateRows="30px 50xp"
+            boxShadow="inset -30px 0px 20px rgba(0, 0, 0, 0.25)"
+        >
             {/* Book and Chapter Labels / dropdowns */}
             <BookChapterBreadCrumb {...bookState} />
-            {/* Timeline bar with the chapter points */}
-            <TimelineBar spacing={500} {...bookState} />
             {/* Back and next buttons */}
             <NavigationButtons
+                // TODO: where are these assigned?
                 back
                 next
                 onBack={handleBack}
                 onNext={handleNext}
             />
-        </div>
+        </Grid>
     );
 };
 
@@ -114,17 +105,24 @@ const BookChapterBreadCrumb = ({ books, selectedBook, selectedChapter }) => {
                 maxHeight={300}
                 onSelect={props.handler}
             >
-                <div className={classes.crumb}>{props.children}</div>
+                <Box userSelect="none" margin="0 1rem">
+                    {props.children}
+                </Box>
             </DropDownMenu>
         );
     };
 
     const Divider = (props) => {
-        return <div className={classes.crumbDivider}>{">"}</div>;
+        return <div>{">"}</div>;
     };
 
     return (
-        <div className={classes.bookCrumbs}>
+        <Flex
+            alignItems="center"
+            fontSize="20px"
+            fontWeight="500"
+            color="primaryColor"
+        >
             <Crumb options={Object.keys(books)} handler={handleBookChange}>
                 {selectedBook}
             </Crumb>
@@ -132,99 +130,38 @@ const BookChapterBreadCrumb = ({ books, selectedBook, selectedChapter }) => {
             <Crumb options={chapters} handler={handleChapterChange}>
                 {chapters[selectedChapter]}
             </Crumb>
-        </div>
-    );
-};
-
-const TimelineBar = ({ books, selectedBook, selectedChapter, spacing }) => {
-    const chapters = getBookChapterTitles(books[selectedBook]);
-    const barLength = spacing * (chapters.length - 1);
-    const dispatch = useDispatch();
-    const activeElementRef = useScrollToElement([
-        selectedChapter,
-        selectedBook,
-    ]);
-    const timelineContainerRef = useRef(null);
-    useHorizontalScroll(timelineContainerRef);
-    useMouseDragScroll(timelineContainerRef);
-
-    // When clickon on a chapter, the tooltip becomes stuck,
-    // this will rebuild the tooltip when a new chapter is selected
-    useEffect(() => {
-        ReactTooltip.rebuild();
-    });
-
-    const ChapterMarkers = ({ position, selected, title, ...props }) => {
-        return (
-            <div
-                className={cs(classes.marker)}
-                style={{ left: position }}
-                ref={selected ? activeElementRef : null}
-                {...props}
-            >
-                {selected ? (
-                    <TimePointActive data-tip={title} />
-                ) : (
-                    <TimePoint data-tip={title} />
-                )}
-            </div>
-        );
-    };
-
-    const handleSelection = (chapter, index) => {
-        dispatch(setSelectedChapter(chapter, index));
-    };
-
-    return (
-        <div
-            ref={timelineContainerRef}
-            className={classes.timelineBarContainer}
-        >
-            {chapters.length > 0 && (
-                <div className={classes.timelineBarWrapper}>
-                    <div
-                        className={classes.timelineBar}
-                        style={{
-                            width: `${barLength}px`,
-                        }}
-                    >
-                        {/* TODO: Better key here */}
-                        {chapters.map((chapter, index) => (
-                            <ChapterMarkers
-                                onClick={() =>
-                                    index !== selectedChapter &&
-                                    handleSelection(chapter, index)
-                                }
-                                selected={index === selectedChapter}
-                                key={`chapter_${index}`}
-                                title={chapter}
-                                position={index * spacing}
-                            />
-                        ))}
-                    </div>
-                    <Tooltip effect={"solid"} />
-                </div>
-            )}
-        </div>
+        </Flex>
     );
 };
 
 const NavigationButtons = ({ back, next, onBack, onNext }) => {
+    const NavButton = (props) => (
+        <IconButton
+            {...props}
+            fontSize="32px"
+            color="primaryColor"
+            colorScheme="trasparent"
+        >
+            {props.children}
+        </IconButton>
+    );
+
     return (
-        <div className={cs(classes.bookNav)}>
-            <button
+        <Flex alignItems="center" p="0 0.5rem">
+            <NavButton
+                aria-label="Previous Chapter"
                 onClick={onBack}
-                className={cs(classes.navButton, { [classes.hideNav]: !back })}
-            >
-                <i className="icon-back"></i>
-            </button>
-            <button
+                visibility={back || "hidden"}
+                icon={<i className="icon-back"></i>}
+            />
+            <Spacer />
+            <NavButton
+                aria-label="Next Chapter"
                 onClick={onNext}
-                className={cs(classes.navButton, { [classes.hideNav]: !next })}
-            >
-                <i className="icon-next"></i>
-            </button>
-        </div>
+                visibility={back || "hidden"}
+                icon={<i className="icon-next" />}
+            />
+        </Flex>
     );
 };
 

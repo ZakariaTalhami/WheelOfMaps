@@ -5,11 +5,7 @@ import { loadBooks } from "./actions/BookActions";
 import { loadCharacters } from "./actions/CharacterActions";
 import { loadLocations } from "./actions/LocationActions";
 import Main from "./views/main/Main";
-import styled from "styled-components";
-
-const AppWrapper = styled.div`
-    height: 100%;
-`;
+import { Box } from "@chakra-ui/react";
 
 function App() {
     const [isLoading, setIsloading] = useState(true);
@@ -24,7 +20,7 @@ function App() {
         ]).then(() => setIsloading(false));
     }, []);
 
-    return <AppWrapper>{isLoading ? <LoadingScreen /> : <Main />}</AppWrapper>;
+    return <Box w="100%">{isLoading ? <LoadingScreen /> : <Main />}</Box>;
 }
 
 export default App;

@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import StoreProvider from "./store";
 import { configureAxios } from "./API/axiosSetup";
-import { createGlobalStyle } from "styled-components";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 // Components
 import App from "./App";
 // Global Styles
@@ -17,18 +17,28 @@ import "./assets/fonts/style.css";
 import "leaflet/dist/leaflet.css";
 import "./assets/_leafletjs.override.scss";
 
-createGlobalStyle({
-    ...resetCSS,
-    ...baseStyle,
+const theme = extendTheme({
+    colors: {
+        primaryColor: "#DAD2BC",
+        neutralColor: "#252323",
+    },
+    styles: {
+        global: {
+            ...resetCSS,
+            ...baseStyle,
+        },
+    },
 });
 
 configureAxios();
 
 ReactDOM.render(
     <React.StrictMode>
-        <StoreProvider>
-            <App />
-        </StoreProvider>
+        <ChakraProvider theme={theme}>
+            <StoreProvider>
+                <App />
+            </StoreProvider>
+        </ChakraProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );

@@ -1,28 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import classes from './SideMenu.module.scss';
-import cs from 'classnames';
+import React, { useState } from "react";
+import { Box } from "@chakra-ui/react";
+import Navbar from "./navbar/Navbar";
+import { NAVIGATION } from "./navigation";
+import Drawer from "./drawer/Drawer";
 
-const SideMenu = ({open, className, ...props}) => {
-    const [isOpen, setIsOpen] = useState(open);
+const SideMenuWrapper = (props) => (
+    <Box
+        {...props}
+        pos="relative"
+        pointerEvents="initial"
+        flex="1"
+        w="fit-content"
+    />
+);
 
-    useEffect(() => {
-        setIsOpen(isOpen);
-    }, [open]); // update the isOpen when there are new children
+const SideMenu = (props) => {
+    const [currentNavigation, setCurrentNavigation] = useState(null);
+    const drawerContent = NAVIGATION.find(
+        (nav) => nav.name === currentNavigation
+    );
 
-    const handleOpenToggle = () => {
-        setIsOpen(!isOpen);
-    }
+    const close = () => setCurrentNavigation(null);
+
+    const onSelection = (selection) => {
+        setCurrentNavigation(
+            selection !== currentNavigation ? selection : null
+        );
+    };
 
     return (
-        <div className={cs(classes.sideMenu, className, {[classes.open]: isOpen})} {...props}>
-            <div className={classes.toggleButton} onClick={handleOpenToggle}>
-                <i className="icon-burger"></i>
-            </div>
-            <div className={classes.content}>
-                {props.children}
-            </div>
-        </div>
+        <SideMenuWrapper>
+            <Drawer onClose={close} content={drawerContent} />
+            <Navbar
+                onSelect={onSelection}
+                selected={currentNavigation}
+                navigation={NAVIGATION}
+            />
+        </SideMenuWrapper>
     );
-}
+};
 
 export default SideMenu;
