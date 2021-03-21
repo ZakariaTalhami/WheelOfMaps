@@ -25,6 +25,8 @@ const NavIcon = (props) => (
     >
         {/* Added a Box to fix the forwardRef issue with react-icons */}
         <Box
+            role="link"
+            onClick={props.onClick}
             borderRight="4px solid"
             borderColor={props.isSelected ? "neutralColor" : "transparent"}
             textAlign="center"
@@ -35,7 +37,7 @@ const NavIcon = (props) => (
                 cursor="pointer"
                 boxSize="35px"
                 color="neutralColor"
-                {...props}
+                as={props.as}
             />
         </Box>
     </Tooltip>

@@ -66,6 +66,7 @@ const Timeline = ({ className }) => {
     return (
         <Grid
             bgColor="neutralColor"
+            pointerEvents="all"
             templateRows="30px 50xp"
             boxShadow="inset -30px 0px 20px rgba(0, 0, 0, 0.25)"
         >

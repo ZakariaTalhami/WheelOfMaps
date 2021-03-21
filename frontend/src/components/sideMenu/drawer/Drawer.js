@@ -5,6 +5,7 @@ import { NavigationType } from "../navigation";
 
 const DrawerWraper = (props) => (
     <Flex
+        data-testid="side-drawer"
         pos="absolute"
         top="0"
         left="100%"
@@ -24,11 +25,10 @@ const DrawerWraper = (props) => (
 const DrawerHeader = (props) => (
     <Flex w="100%" justifyContent="flex-end" p="15px">
         <IconButton
+            role="button"
             size="xs"
             colorScheme="solidButton"
             onClick={props.onClose}
-            // bgColor="neutralColor"
-            // color="primaryColor"
             icon={<Icon color="primaryColor" as={FaTimes} />}
         />
     </Flex>
