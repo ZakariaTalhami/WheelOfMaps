@@ -17,6 +17,13 @@ export default class baseEntity {
     }
 
     /**
+     * Set dirty state to true
+     */
+    setDirty() {
+        this.#isDirty = true;
+    }
+
+    /**
      * Saves the dirty entity to the server
      * @returns {Promise} - http response from save.
      */

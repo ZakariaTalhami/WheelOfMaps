@@ -3,39 +3,45 @@ import axios from "axios";
 
 jest.mock("axios");
 
-let instance = new baseEntity();
+let entity;
 beforeEach(() => {
-    instance = new baseEntity();
+    entity = new baseEntity();
 });
 
 test("clean at initializations", () => {
-    expect(instance.isDirty()).toEqual(false);
+    expect(entity.isDirty()).toEqual(false);
+});
+
+test("setDirty sets the state to true", () => {
+    entity.setDirty();
+
+    expect(entity.isDirty()).toEqual(true);
 });
 
 test("getUrl throws error not implemented", () => {
-    expect(instance.getUrl).toThrow(
+    expect(entity.getUrl).toThrow(
         "getUrl() needs to be overriden in the child"
     );
 });
 
 test("serialization", () => {
-    expect(instance.serialize()).toStrictEqual("{}");
+    expect(entity.serialize()).toStrictEqual("{}");
 });
 
 test("dirty save serializes the object and performs a post request", () => {
-    jest.spyOn(instance, "isDirty").mockReturnValue(true);
-    jest.spyOn(instance, "getUrl").mockReturnValue("path/to/entity");
-    jest.spyOn(instance, "serialize").mockReturnValue("{entity}");
+    jest.spyOn(entity, "isDirty").mockReturnValue(true);
+    jest.spyOn(entity, "getUrl").mockReturnValue("path/to/entity");
+    jest.spyOn(entity, "serialize").mockReturnValue("{entity}");
 
-    instance.save();
+    entity.save();
 
-    expect(instance.getUrl).toHaveBeenCalled();
-    expect(instance.serialize).toHaveBeenCalled();
+    expect(entity.getUrl).toHaveBeenCalled();
+    expect(entity.serialize).toHaveBeenCalled();
     expect(axios.post).toHaveBeenCalledWith("path/to/entity", "{entity}");
 });
 
 test("clean save does not send request", () => {
-    instance.save();
+    entity.save();
 
     expect(axios.post).not.toHaveBeenCalled();
 });
