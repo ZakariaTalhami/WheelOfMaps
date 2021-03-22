@@ -4,7 +4,7 @@ import classes from "./Main.module.scss";
 import Timeline from "./timeline/Timeline";
 import { ReactComponent as WotIcon } from "../../assets/icons/Wheel-icon.svg";
 import Map from "../map/Map";
-import { Box, Flex, Grid } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
 const Main = () => {
     const testString =
