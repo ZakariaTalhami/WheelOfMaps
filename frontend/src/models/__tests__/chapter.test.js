@@ -2,6 +2,7 @@ import Chapter from "../chapter";
 
 const MOCK_BOOK_ID = "<bookID>";
 const MOCK_CHAPTER = {
+    _id: "be7983c1-00db-4b1d-aef7-0dfc5946f8e3",
     number: 1,
     title: "title",
     summary: "summary",
@@ -16,6 +17,7 @@ beforeEach(() => {
 test("constructor with passed arguments", () => {
     let chapter = new Chapter(
         "bookId",
+        "be7983c1-00db-4b1d-aef7-0dfc5946f8e3",
         23,
         "chapterTitle",
         "chapterSummary",

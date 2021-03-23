@@ -7,8 +7,8 @@ export default class Chapter extends baseEntity {
     summary;
     index;
 
-    constructor(bookId, number, title, summary, chapterIndex) {
-        super();
+    constructor(bookId, chapterId, number, title, summary, chapterIndex) {
+        super(chapterId);
         this.#bookId = bookId;
         this.number = number;
         this.title = title;
@@ -19,6 +19,7 @@ export default class Chapter extends baseEntity {
     static ConstructFromObject(bookId, chapterObj) {
         return new Chapter(
             bookId,
+            chapterObj._id,
             chapterObj.number,
             chapterObj.title,
             chapterObj.summary,
