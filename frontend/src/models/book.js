@@ -31,7 +31,9 @@ export default class Book extends baseEntity {
         const chapters = [];
         if (bookObj.chapters) {
             bookObj.chapters.forEach((chapter) => {
-                chapters.push(new Chapter(bookObj._id, chapter));
+                chapters.push(
+                    Chapter.ConstructFromObject(bookObj._id, chapter)
+                );
             });
         }
 

@@ -4,27 +4,10 @@ import {
     CHAPTER_SELECTED,
 } from "../actions/types";
 import _ from "lodash";
+import Book from "../models/book";
 
-const mockState = {
-    books: {
-        "Eye of the world": [
-            "Chapter 1",
-            "Chapter 2",
-            "Chapter 3",
-            "Chapter 4",
-            "Chapter 5",
-        ],
-        "Great Hunt": ["Chapter 1", "Chapter 2", "Chapter 3"],
-        "The dragon reborn": [
-            "Chapter 1",
-            "Chapter 2",
-            "Chapter 3",
-            "Chapter 4",
-            "Chapter 5",
-            "Chapter 6",
-            "Chapter 7",
-        ],
-    },
+const INTIAL_STATE = {
+    books: {},
     selectedBook: undefined,
     selectedChapter: undefined,
 };
@@ -44,7 +27,7 @@ const getFirstBook = (books) => {
     return firstBook ? firstBook.title : undefined;
 };
 
-const BookReducer = (state = mockState, action) => {
+const BookReducer = (state = INTIAL_STATE, action) => {
     switch (action.type) {
         case BOOK_SELECTED:
             return {
@@ -60,10 +43,13 @@ const BookReducer = (state = mockState, action) => {
             };
 
         case BOOKS_LOADED:
+            const bookModels = action.books.map((book) =>
+                Book.ConstructFromObject(book)
+            );
             return {
                 ...state,
-                books: rawBookHandler(action.books),
-                selectedBook: getFirstBook(action.books),
+                books: rawBookHandler(bookModels),
+                selectedBook: getFirstBook(bookModels),
                 selectedChapter: 0,
             };
         default:

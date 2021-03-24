@@ -15,7 +15,7 @@ import DropDownMenu from "../../../components/dropdownMenu/DropDownMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Flex, Grid, IconButton, Spacer } from "@chakra-ui/react";
 
-const Timeline = ({ className }) => {
+const Timeline = () => {
     const bookState = useSelector((state) => state.Books);
     const dispatch = useDispatch();
 
@@ -159,7 +159,7 @@ const NavigationButtons = ({ back, next, onBack, onNext }) => {
             <NavButton
                 aria-label="Next Chapter"
                 onClick={onNext}
-                visibility={back || "hidden"}
+                visibility={next || "hidden"}
                 icon={<i className="icon-next" />}
             />
         </Flex>
