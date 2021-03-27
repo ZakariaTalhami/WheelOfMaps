@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`match snapshot 1`] = `
+<div>
+  <div
+    class="css-sjan41"
+  >
+    <div
+      class="chakra-stack css-1mhc6c5"
+    >
+      <div
+        class="chakra-select__wrapper css-1njiejo"
+      >
+        <select
+          class="chakra-select css-wd7gg9"
+          data-testid="book-select"
+          options="Book 1,Book 2"
+        >
+          <option
+            data-testid="option"
+            style="background-color: rgb(169, 153, 133); appearance: none; padding: 10px;"
+            value="Book 1"
+          >
+            Book 1
+          </option>
+          <option
+            data-testid="option"
+            style="background-color: rgb(169, 153, 133); appearance: none; padding: 10px;"
+            value="Book 2"
+          >
+            Book 2
+          </option>
+        </select>
+        <div
+          class="chakra-select__icon-wrapper css-h22hlv"
+        />
+      </div>
+      <div
+        class="chakra-select__wrapper css-1njiejo"
+      >
+        <select
+          class="chakra-select css-wd7gg9"
+          data-testid="chapter-select"
+          options="Chapter 1: title 1,Chapter 2: title 1"
+        >
+          <option
+            data-testid="option"
+            style="background-color: rgb(169, 153, 133); appearance: none; padding: 10px;"
+            value="Chapter 1: title 1"
+          >
+            Chapter 1: title 1
+          </option>
+          <option
+            data-testid="option"
+            style="background-color: rgb(169, 153, 133); appearance: none; padding: 10px;"
+            value="Chapter 2: title 1"
+          >
+            Chapter 2: title 1
+          </option>
+        </select>
+        <div
+          class="chakra-select__icon-wrapper css-h22hlv"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

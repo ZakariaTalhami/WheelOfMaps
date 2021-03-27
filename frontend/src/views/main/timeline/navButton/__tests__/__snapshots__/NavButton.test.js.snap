@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot - no selection 1`] = `
+<div>
+  <div
+    class="css-ug2oqc"
+  >
+    <button
+      class="chakra-button css-1a8ali6"
+      type="button"
+    />
+  </div>
+</div>
+`;

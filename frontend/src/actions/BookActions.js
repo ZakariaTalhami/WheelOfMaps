@@ -6,9 +6,8 @@ export const setSelectedBook = (bookTitle) => ({
     book: bookTitle,
 });
 
-export const setSelectedChapter = (chapterName, chapterIndex) => ({
+export const setSelectedChapter = (chapterIndex) => ({
     type: CHAPTER_SELECTED,
-    chapter: chapterName,
     index: chapterIndex,
 });
 
