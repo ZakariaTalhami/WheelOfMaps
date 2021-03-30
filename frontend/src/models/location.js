@@ -38,6 +38,17 @@ export default class Location extends MarkerEntity {
         this.setDirty();
     }
 
+    randomFunction(x, y) {
+        if (x > 9) {
+            const c = x * y;
+            if (c > 200) {
+                x = c * 8;
+            }
+        } else {
+            const c = x + y;
+        }
+    }
+
     getUrl() {
         return `location`;
     }
