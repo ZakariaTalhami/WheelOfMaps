@@ -1,4 +1,5 @@
 import MarkerEntity from "../markerEntity";
+import { render } from "../../utils/TestUtils";
 
 const MOCK_ENTITY_ID = "be7983c1-00db-4b1d-aef7-0dfc5946f8e3";
 const MOCK_MARKER = {
@@ -21,6 +22,28 @@ test("Initialization creates marker instance", () => {
     expect(markerEntity.marker.icon).toEqual(MOCK_MARKER.icon);
     expect(markerEntity.marker.anchor).toEqual(MOCK_MARKER.anchor);
     expect(markerEntity.marker.rotation).toEqual(MOCK_MARKER.rotation);
+});
+
+test("renderMarker passes props to component from getMarkerComponent()", () => {
+    const mockMarkerComponent = jest.fn().mockReturnValue("");
+    jest.spyOn(markerEntity, "getMarkerComponent").mockReturnValue(
+        mockMarkerComponent
+    );
+
+    render(markerEntity.renderMarker());
+
+    expect(mockMarkerComponent).toHaveBeenCalledWith(
+        {
+            entity: markerEntity,
+        },
+        expect.any(Object)
+    );
+});
+
+test("getMarkerComponent throws error", () => {
+    expect(markerEntity.getMarkerComponent).toThrow(
+        "getMarkerComponent() needs to be overriden in the child"
+    );
 });
 
 test("setMarkerIcon", () => {

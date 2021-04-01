@@ -1,3 +1,4 @@
+import React from "react";
 import baseEntity from "./baseEntity";
 import Marker from "./marker";
 
@@ -7,6 +8,15 @@ export default class MarkerEntity extends baseEntity {
     constructor(_id, markerObj) {
         super(_id);
         this.marker = Marker.ConstructFromObject(markerObj);
+    }
+
+    renderMarker() {
+        const Marker = this.getMarkerComponent();
+        return <Marker entity={this} />;
+    }
+
+    getMarkerComponent() {
+        throw "getMarkerComponent() needs to be overriden in the child";
     }
 
     setMarkerIcon(iconUrl) {
