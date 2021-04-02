@@ -2,6 +2,7 @@ import React from "react";
 import baseEntity from "./baseEntity";
 import Marker from "./marker";
 
+// TODO: add documentation
 export default class MarkerEntity extends baseEntity {
     marker;
 
@@ -12,7 +13,7 @@ export default class MarkerEntity extends baseEntity {
 
     renderMarker() {
         const Marker = this.getMarkerComponent();
-        return <Marker entity={this} />;
+        return <Marker key={this._id} entity={this} />;
     }
 
     getMarkerComponent() {

@@ -13,14 +13,8 @@ export default class Location extends MarkerEntity {
         this.description = description;
     }
 
-    static ConstructFromObject({
-        locationId,
-        name,
-        position,
-        description,
-        marker,
-    }) {
-        return new Location(locationId, name, position, description, marker);
+    static ConstructFromObject({ _id, name, position, description, marker }) {
+        return new Location(_id, name, position, description, marker);
     }
 
     setName(name) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
-import MapOverlay from "./MapOverlay";
+import MarkerGenerator from "./MarkerGenerator";
 
 const PADDING = 10;
 const BACKEND_HOST = process.env.REACT_APP_BACKEND_HOST;
@@ -34,7 +34,7 @@ const Map = () => {
                 ]}
             />
             <MapEvents />
-            <MapOverlay />
+            <MarkerGenerator />
         </MapContainer>
     );
 };

@@ -1,3 +1,4 @@
+// TODO: add documentation
 export default class Marker {
     icon;
     size;
