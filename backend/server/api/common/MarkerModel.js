@@ -5,7 +5,6 @@ export const markerValidationObj = Joi.object({
     icon: Joi.string().required(),
     size: Joi.array().items(Joi.number()).length(2),
     anchor: Joi.array().items(Joi.number()).length(2),
-    anchor: Joi.number(),
 });
 
 function MarkerModel(schema, options) {
