@@ -1,4 +1,5 @@
 import MarkerEntity from "./markerEntity";
+import LocationMarker from "../views/map/Markers/LocationMarker";
 
 export default class Location extends MarkerEntity {
     name;
@@ -40,5 +41,9 @@ export default class Location extends MarkerEntity {
 
     getUrl() {
         return `location`;
+    }
+
+    getMarkerComponent() {
+        return LocationMarker;
     }
 }

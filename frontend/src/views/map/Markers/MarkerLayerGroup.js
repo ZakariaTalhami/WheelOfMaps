@@ -20,7 +20,7 @@ const MarkerLayerGroup = () => {
         // TODO: skip marker depending on selected chapter
 
         return _.map(markerData, (data) => (
-            <MarkerComponent key={data._id} {...data} />
+            <MarkerComponent key={data._id} entity={data} />
         ));
     });
 

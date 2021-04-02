@@ -1,3 +1,4 @@
+import LocationMarker from "../../views/map/Markers/LocationMarker";
 import Location from "../location";
 
 const MOCK_MARKER = {
@@ -57,4 +58,8 @@ test("setDescription", () => {
 
 test("getUrl", () => {
     expect(location.getUrl()).toEqual("location");
+});
+
+test("getMarkerComponent", () => {
+    expect(location.getMarkerComponent()).toEqual(LocationMarker);
 });
