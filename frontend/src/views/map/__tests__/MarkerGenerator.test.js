@@ -34,11 +34,10 @@ const getMockState = (options) => {
     };
 };
 
-let mockKey = 1;
 beforeEach(() => {
     Location.prototype.renderMarker = jest
         .fn()
-        .mockReturnValue(<div key={mockKey++} data-testid="location-marker" />);
+        .mockReturnValue(<div data-testid="location-marker" />);
 });
 
 test("generates all the markers in the state", () => {

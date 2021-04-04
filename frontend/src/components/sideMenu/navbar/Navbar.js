@@ -1,51 +1,66 @@
-import { Box, Flex, Icon, Tooltip, VStack } from "@chakra-ui/react";
-import React from "react";
+// Core
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+// Components
+import { Box, Flex, Icon, IconButton, Text, VStack } from "@chakra-ui/react";
 import { NavigationType } from "../navigation";
+import { FaBars } from "react-icons/fa";
 
 const NavbarWraper = (props) => (
     <Flex
+        role="navigation"
         pos="relative"
-        justify="center"
         bgColor="primaryColor"
         height="100%"
-        w="50px"
+        w={props.open ? "200px" : "50px"}
+        transition="all 0.3s"
+        flexDirection="column"
         shadow="4px -4px 10px 4px rgba(0, 0, 0, 0.25);"
         {...props}
     />
 );
 
 const NavIcon = (props) => (
-    <Tooltip
-        hasArrow
-        label={props.label}
-        placement="right"
-        bg="neutralColor"
-        color="primaryColor"
+    /* Added a Box to fix the forwardRef issue with react-icons */
+    <Box
+        role="link"
+        title={props.label}
+        onClick={props.onClick}
+        borderRight="4px solid"
+        borderColor={props.isSelected ? "neutralColor" : "transparent"}
+        textAlign="left"
+        w="100%"
+        p="10px 5px"
+        overflowX="hidden"
+        whiteSpace="nowrap"
     >
-        {/* Added a Box to fix the forwardRef issue with react-icons */}
-        <Box
-            role="link"
-            onClick={props.onClick}
-            borderRight="4px solid"
-            borderColor={props.isSelected ? "neutralColor" : "transparent"}
-            textAlign="center"
-            w="100%"
-            p="10px 0"
-        >
-            <Icon
-                cursor="pointer"
-                boxSize="35px"
-                color="neutralColor"
-                as={props.as}
-            />
-        </Box>
-    </Tooltip>
+        <Flex cursor="pointer" color="neutralColor" alignItems="center">
+            <Icon boxSize="35px" as={props.as} />
+            <Text pl="10px" as="span" fontWeight="500">
+                {props.label}
+            </Text>
+        </Flex>
+    </Box>
 );
 
 const Navbar = ({ onSelect, selected, navigation }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <NavbarWraper>
+        <NavbarWraper open={isOpen}>
+            {/* Toggle Button */}
+            <VStack spacing="20px" w="100%" pl="8px" pt="10px" align="start">
+                <IconButton
+                    role="button"
+                    size="sm"
+                    colorScheme="invertedButton"
+                    onClick={() => setIsOpen(!isOpen)}
+                    icon={
+                        <Icon color="neutralColor" boxSize="25px" as={FaBars} />
+                    }
+                />
+            </VStack>
+            {/* Navigation  Icons */}
             <VStack spacing="20px" w="100%" pt="25px">
                 {navigation.map((opt) => (
                     <NavIcon

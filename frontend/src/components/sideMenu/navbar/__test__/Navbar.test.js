@@ -9,14 +9,12 @@ test("renders all the navigation links", () => {
     expect(screen.getAllByRole("link").length).toEqual(NAVIGATION.length);
 });
 
-test("Hover over link renders tooltip", async () => {
+test("link have titles", async () => {
     render(<Navbar navigation={NAVIGATION} />);
 
-    const links = screen.getAllByRole("link");
-    fireEvent.mouseOver(links[0]);
-
-    await screen.findByRole("tooltip");
-    expect(screen.getByText(NAVIGATION[0].label)).toBeInTheDocument();
+    NAVIGATION.forEach((nav) => {
+        expect(screen.getByTitle(nav.label)).toBeDefined();
+    });
 });
 
 test("Navigation shows selection indicator", () => {
@@ -40,6 +38,25 @@ test("Clicking triggers selection", () => {
     fireEvent.click(links[1]);
 
     expect(onSelect).toHaveBeenCalledWith(NAVIGATION[1].name);
+});
+
+test("expand/collapse toggle", () => {
+    render(<Navbar navigation={NAVIGATION} />);
+
+    // Navbar should be collapsed
+    expect(screen.getByRole("navigation")).toHaveStyle("width: 50px");
+
+    // Expand Navbar
+    fireEvent.click(screen.getByRole("button"));
+
+    // Navbar should be expanded
+    expect(screen.getByRole("navigation")).toHaveStyle("width: 200px");
+
+    // Collaps Navbar
+    fireEvent.click(screen.getByRole("button"));
+
+    // Navbar should be collapsed
+    expect(screen.getByRole("navigation")).toHaveStyle("width: 50px");
 });
 
 test("matches snapshot - no selection", () => {

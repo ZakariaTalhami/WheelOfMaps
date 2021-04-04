@@ -12,6 +12,11 @@ const extendedTheme = extendTheme({
             600: "#252323",
             700: "#635E5E",
         },
+        invertedButton: {
+            500: "#DAD2BC",
+            600: "#B8AD8E",
+            700: "#998B65",
+        },
     },
     styles: {
         global: {
