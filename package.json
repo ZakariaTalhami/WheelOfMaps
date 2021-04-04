@@ -6,7 +6,8 @@
   "scripts": {
     "start": "concurrently \"npm run frontend:dev\" \"cd npm backend:dev\"",
     "frontend:dev": "cd frontend && npm run start",
-    "backend:dev": "cd backend && npm run watch:dev"
+    "backend:dev": "cd backend && npm run watch:dev",
+    "testFrontend": "cd frontend && npm run test"
   },
   "author": "",
   "license": "ISC",
