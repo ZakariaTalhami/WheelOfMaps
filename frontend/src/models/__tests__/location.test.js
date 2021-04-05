@@ -16,7 +16,7 @@ const MOCk_LOCATION = {
     marker: MOCK_MARKER,
 };
 
-let location = Location.ConstructFromObject(MOCk_LOCATION);
+let location;
 beforeEach(() => {
     location = Location.ConstructFromObject(MOCk_LOCATION);
 });
@@ -49,7 +49,7 @@ test("setPosition", () => {
 test("setDescription", () => {
     expect(location.isDirty()).toEqual(false);
 
-    const expectedDescription = { 10101: "soem description" };
+    const expectedDescription = { 10101: "some description" };
     location.setDescription(expectedDescription);
 
     expect(location.description).toEqual(expectedDescription);
