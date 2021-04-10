@@ -1,3 +1,4 @@
+import CharacterMarker from "../../views/map/Markers/CharacterMarker";
 import Character from "../character";
 
 const MOCK_MARKER = {
@@ -10,7 +11,7 @@ const MOCK_MARKER = {
 const MOCK_CHARACTER = {
     _id: "be7983c1-00db-4b1d-aef7-0dfc5946f8e3",
     name: "The fool in a hat",
-    postion: [
+    position: [
         {
             chapterRange: "01001",
             position: [1, 5],
@@ -32,6 +33,11 @@ test("Initialization", () => {
     expect(character.name).toEqual(MOCK_CHARACTER.name);
     expect(character.position).toEqual(MOCK_CHARACTER.position);
     expect(character.chapterSummary).toEqual(MOCK_CHARACTER.chapterSummary);
+});
+
+test("getPosition", () => {
+    expect(character.getPosition("01001")).toEqual([1, 5]);
+    expect(character.getPosition("20202")).toBeNull();
 });
 
 test("setName", () => {
@@ -59,4 +65,12 @@ test("setChapterSummary/getChapterSummary", () => {
 
     expect(character.getChapterSummary("10101")).toEqual("some description");
     expect(character.isDirty()).toEqual(true);
+});
+
+test("getUrl returns character endpoint", () => {
+    expect(character.getUrl()).toEqual("character");
+});
+
+test("getMarkerComponent", () => {
+    expect(character.getMarkerComponent()).toEqual(CharacterMarker);
 });

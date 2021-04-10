@@ -1,3 +1,5 @@
+import { isInChapterRange } from "../utils/BookUtils";
+import CharacterMarker from "../views/map/Markers/CharacterMarker";
 import MarkerEntity from "./markerEntity";
 
 export default class Character extends MarkerEntity {
@@ -22,6 +24,15 @@ export default class Character extends MarkerEntity {
         return new Character(_id, name, position, chapterSummary, marker);
     }
 
+    getPosition(chapterIndex) {
+        for (const pos of this.position) {
+            if (isInChapterRange(chapterIndex, pos.chapterRange)) {
+                return pos.position;
+            }
+        }
+        return null;
+    }
+
     setName(name) {
         this.name = name;
         this.setDirty();
@@ -43,5 +54,9 @@ export default class Character extends MarkerEntity {
 
     getUrl() {
         return `character`;
+    }
+
+    getMarkerComponent() {
+        return CharacterMarker;
     }
 }

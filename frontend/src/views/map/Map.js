@@ -42,7 +42,9 @@ const Map = () => {
 function MapEvents() {
     const map = useMapEvents({
         click: (e) => {
-            console.log(e.latlng.lat.toFixed(2), e.latlng.lng.toFixed(2));
+            console.log(
+                `${e.latlng.lat.toFixed(2)}, ${e.latlng.lng.toFixed(2)}`
+            );
         },
     });
     return null;

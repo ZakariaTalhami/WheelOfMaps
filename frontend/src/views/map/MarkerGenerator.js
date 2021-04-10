@@ -11,7 +11,7 @@ const MarkerGenerator = () => {
     const visibleMarkers = [];
 
     entities.locations = useSelector((state) => state.Locations.locations);
-    entities.characters = useSelector((state) => state.Characters.character);
+    entities.characters = useSelector((state) => state.Characters.characters);
 
     Object.keys(entities).forEach((entity) => {
         // Apply Filter here

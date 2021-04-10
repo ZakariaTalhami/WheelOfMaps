@@ -1,6 +1,6 @@
-import { getBookChapterTitles } from "../BookUtils";
+import { getBookChapterTitles, isInChapterRange } from "../BookUtils";
 
-describe(".getBookChapterTitles", () => {
+describe("getBookChapterTitles", () => {
     test("return empty list with no chapters", () => {
         expect(getBookChapterTitles({})).toEqual([]);
     });
@@ -26,5 +26,27 @@ describe(".getBookChapterTitles", () => {
             "Chapter 1: title 1",
             "Chapter 2: title 2",
         ]);
+    });
+});
+
+describe("isInChapterRange", () => {
+    test("invalid range returns false", () => {
+        expect(isInChapterRange("10110", "01010-01015-01010")).toEqual(false);
+    });
+
+    test("single chapter range - not in range", () => {
+        expect(isInChapterRange("10110", "01010")).toEqual(false);
+    });
+
+    test("single chapter range - in range", () => {
+        expect(isInChapterRange("10110", "10110")).toEqual(true);
+    });
+
+    test("multi chapter range - not in range", () => {
+        expect(isInChapterRange("10110", "01010-01015")).toEqual(false);
+    });
+
+    test("multi chapter range - in range", () => {
+        expect(isInChapterRange("01013", "01010-01015")).toEqual(true);
     });
 });
