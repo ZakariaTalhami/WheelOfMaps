@@ -39,6 +39,10 @@ test("constructor with passed chapter object", () => {
     expect(chapter.index).toEqual(MOCK_CHAPTER.chapterIndex);
 });
 
+test("getBookId", () => {
+    expect(chapter.getBookId()).toEqual(MOCK_BOOK_ID);
+});
+
 test("setNumber", () => {
     chapter.setNumber(5);
 

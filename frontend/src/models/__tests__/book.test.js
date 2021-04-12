@@ -1,7 +1,6 @@
 import Book from "../book";
 import Chapter from "../chapter";
 
-const MOCK_BOOK_ID = "<bookID>";
 const MOCK_CHAPTER = {
     _id: "be7983c1-00db-4b1d-aef7-0dfc5946f8e3",
     number: 1,
@@ -25,7 +24,7 @@ beforeEach(() => {
     book = Book.ConstructFromObject(MOCK_BOOK);
 });
 
-test("constructor with passed arguments", () => {
+test("Constructor with passed arguments", () => {
     let book = new Book(
         "be7983c1-00db-4b1d-aef7-0dfc5946f8e3",
         "bookTile",
@@ -44,13 +43,22 @@ test("constructor with passed arguments", () => {
     expect(book.chapters.length).toEqual(2);
 });
 
-test("constructor with passed chapter object", () => {
-    expect(book.title).toEqual(MOCK_BOOK.title);
-    expect(book.series).toEqual(MOCK_BOOK.series);
-    expect(book.seriesIndex).toEqual(MOCK_BOOK.seriesIndex);
-    expect(book.author).toEqual(MOCK_BOOK.author);
-    expect(book.publishDate).toEqual(MOCK_BOOK.publishDate);
-    expect(book.chapters.length).toEqual(2);
+describe("Constructor with passed object", () => {
+    test("Book object has chapters undefined", () => {
+        book = Book.ConstructFromObject({ ...MOCK_BOOK, chapters: undefined });
+
+        expect(Array.isArray(book.chapters)).toEqual(true);
+        expect(book.chapters.length).toEqual(0);
+    });
+
+    test("passed a proper book object", () => {
+        expect(book.title).toEqual(MOCK_BOOK.title);
+        expect(book.series).toEqual(MOCK_BOOK.series);
+        expect(book.seriesIndex).toEqual(MOCK_BOOK.seriesIndex);
+        expect(book.author).toEqual(MOCK_BOOK.author);
+        expect(book.publishDate).toEqual(MOCK_BOOK.publishDate);
+        expect(book.chapters.length).toEqual(2);
+    });
 });
 
 test("ConstructFromObject empty array for chapters if undefiend", () => {
@@ -76,6 +84,13 @@ test("setSeries", () => {
     book.setSeries("newSeries");
 
     expect(book.series).toEqual("newSeries");
+    expect(book.isDirty()).toEqual(true);
+});
+
+test("setSeriesIndex", () => {
+    book.setSeriesIndex(15);
+
+    expect(book.seriesIndex).toEqual(15);
     expect(book.isDirty()).toEqual(true);
 });
 
