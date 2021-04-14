@@ -6,7 +6,7 @@ test("drawer is closed when there isnt content", () => {
     render(<Drawer content={null} />);
 
     expect(screen.getByTestId("side-drawer")).toHaveStyle(
-        "transform: translate(-150%)"
+        "transform: translate(-170%)"
     );
 });
 

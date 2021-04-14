@@ -17,7 +17,7 @@ const DrawerWraper = (props) => (
         maxW="600px"
         shadow="14px -2px 10px 4px rgb(0 0 0 / 25%)"
         transition="all 0.5s"
-        transform={`translate(${props.open ? "0" : "-150%"})`}
+        transform={`translate(${props.open ? "0" : "-170%"})`}
         {...props}
     />
 );

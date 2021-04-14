@@ -28,7 +28,7 @@ test("Clicking on the navigation link opens/closes the drawer", () => {
         fireEvent.click(navLink);
 
         // Check Drawer closed
-        expect(drawer).toHaveStyle("transform: translate(-150%)");
+        expect(drawer).toHaveStyle("transform: translate(-170%)");
     });
 });
 
@@ -45,5 +45,5 @@ test("closed is called from drawer", () => {
     fireEvent.click(within(drawer).getByRole("button"));
 
     // Check Drawer closed
-    expect(drawer).toHaveStyle("transform: translate(-150%)");
+    expect(drawer).toHaveStyle("transform: translate(-170%)");
 });

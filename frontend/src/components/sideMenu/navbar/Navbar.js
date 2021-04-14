@@ -2,7 +2,15 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 // Components
-import { Box, Flex, Icon, IconButton, Text, VStack } from "@chakra-ui/react";
+import {
+    Box,
+    Flex,
+    Icon,
+    IconButton,
+    Text,
+    useBreakpointValue,
+    VStack,
+} from "@chakra-ui/react";
 import { NavigationType } from "../navigation";
 import { FaBars } from "react-icons/fa";
 
@@ -11,10 +19,14 @@ const NavbarWraper = (props) => (
         role="navigation"
         pos="relative"
         bgColor="primaryColor"
-        height="100%"
+        height={["unset", "100%"]}
+        maxHeight={props.open ? ["300px", "unset"] : ["50px", "unset"]}
+        margin={["5px", "0"]}
+        borderRadius={["5px", "0"]}
         w={props.open ? "200px" : "50px"}
         transition="all 0.3s"
         flexDirection="column"
+        overflowY="hidden"
         shadow="4px -4px 10px 4px rgba(0, 0, 0, 0.25);"
         {...props}
     />
@@ -45,6 +57,16 @@ const NavIcon = (props) => (
 
 const Navbar = ({ onSelect, selected, navigation }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const isMobileView = useBreakpointValue({ base: true, sm: false });
+
+    const handleSelection = (naviationName) => {
+        // While in mobile, close the navbar on selection
+        if (isMobileView) {
+            setIsOpen(false);
+        }
+
+        onSelect(naviationName);
+    };
 
     return (
         <NavbarWraper open={isOpen}>
@@ -65,7 +87,7 @@ const Navbar = ({ onSelect, selected, navigation }) => {
                 {navigation.map((opt) => (
                     <NavIcon
                         key={opt.name}
-                        onClick={() => onSelect(opt.name)}
+                        onClick={() => handleSelection(opt.name)}
                         isSelected={selected === opt.name}
                         label={opt.label}
                         as={opt.Icon}

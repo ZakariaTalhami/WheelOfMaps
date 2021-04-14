@@ -3,7 +3,7 @@
 exports[`matches snapshot - no selection 1`] = `
 <div>
   <div
-    class="css-s32whp"
+    class="css-1bbzl8o"
     role="navigation"
   >
     <div
@@ -133,7 +133,7 @@ exports[`matches snapshot - no selection 1`] = `
 exports[`matches snapshot - with selection 1`] = `
 <div>
   <div
-    class="css-s32whp"
+    class="css-1bbzl8o"
     role="navigation"
   >
     <div
