@@ -1,5 +1,7 @@
-import MarkerEntity from "../markerEntity";
+// Lib
 import { render } from "../../utils/TestUtils";
+// Tested model
+import MarkerEntity from "../markerEntity";
 
 const MOCK_ENTITY_ID = "be7983c1-00db-4b1d-aef7-0dfc5946f8e3";
 const MOCK_MARKER = {
@@ -80,4 +82,9 @@ test("setRotation", () => {
 
     expect(markerEntity.marker.rotation).toEqual(90);
     expect(markerEntity.isDirty()).toEqual(true);
+});
+
+test("isInChapter", () => {
+    expect(markerEntity.isInChapter()).toEqual(true);
+    expect(markerEntity.isInChapter("chapterIndex")).toEqual(true);
 });

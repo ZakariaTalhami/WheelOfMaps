@@ -1,4 +1,5 @@
 import CharacterMarker from "../../views/map/Markers/CharacterMarker";
+// Tested Model
 import Character from "../character";
 
 const MOCK_MARKER = {
@@ -13,7 +14,7 @@ const MOCK_CHARACTER = {
     name: "The fool in a hat",
     position: [
         {
-            chapterRange: "01001",
+            chapterRange: "01005-01010",
             position: [1, 5],
         },
     ],
@@ -36,7 +37,8 @@ test("Initialization", () => {
 });
 
 test("getPosition", () => {
-    expect(character.getPosition("01001")).toEqual([1, 5]);
+    expect(character.getPosition("01001")).toBeNull();
+    expect(character.getPosition("01008")).toEqual([1, 5]);
     expect(character.getPosition("20202")).toBeNull();
 });
 
@@ -73,4 +75,10 @@ test("getUrl returns character endpoint", () => {
 
 test("getMarkerComponent", () => {
     expect(character.getMarkerComponent()).toEqual(CharacterMarker);
+});
+
+test("isInChapter", () => {
+    expect(character.isInChapter("01001")).toEqual(false);
+    expect(character.isInChapter("01008")).toEqual(true);
+    expect(character.isInChapter("01012")).toEqual(false);
 });

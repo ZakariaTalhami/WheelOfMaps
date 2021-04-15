@@ -1,6 +1,7 @@
 import { isInChapterRange } from "../utils/BookUtils";
 import CharacterMarker from "../views/map/Markers/CharacterMarker";
 import MarkerEntity from "./markerEntity";
+import _ from "lodash";
 
 export default class Character extends MarkerEntity {
     name;
@@ -58,5 +59,9 @@ export default class Character extends MarkerEntity {
 
     getMarkerComponent() {
         return CharacterMarker;
+    }
+
+    isInChapter(chapterIndex) {
+        return !_.isNull(this.getPosition(chapterIndex));
     }
 }

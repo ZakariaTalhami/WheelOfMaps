@@ -10,6 +10,9 @@ const MarkerGenerator = () => {
     const entities = {};
     const visibleMarkers = [];
 
+    const currentChapterIndex = useSelector(
+        (state) => state.Books.selectedChapterIndex
+    );
     entities.locations = useSelector((state) => state.Locations.locations);
     entities.characters = useSelector((state) => state.Characters.characters);
 
@@ -18,7 +21,9 @@ const MarkerGenerator = () => {
         if (_.isArray(entities[entity])) {
             entities[entity].forEach((el) => {
                 // Check chapter inclusion
-                visibleMarkers.push(el);
+                if (el.isInChapter(currentChapterIndex)) {
+                    visibleMarkers.push(el);
+                }
             });
         }
     });

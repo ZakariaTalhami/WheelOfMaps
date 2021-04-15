@@ -1,5 +1,7 @@
 import MarkerEntity from "./markerEntity";
 import LocationMarker from "../views/map/Markers/LocationMarker";
+import { isInChapterRange } from "../utils/BookUtils";
+import _ from "lodash";
 
 export default class Location extends MarkerEntity {
     name;
@@ -33,11 +35,25 @@ export default class Location extends MarkerEntity {
         this.setDirty();
     }
 
+    getDescription(chapterIndex) {
+        for (const descriptionItem of this.description) {
+            if (isInChapterRange(chapterIndex, descriptionItem.chapterRange)) {
+                return descriptionItem;
+            }
+        }
+
+        return null;
+    }
+
     getUrl() {
         return `location`;
     }
 
     getMarkerComponent() {
         return LocationMarker;
+    }
+
+    isInChapter(chapterIndex) {
+        return _.isObject(this.getDescription(chapterIndex));
     }
 }

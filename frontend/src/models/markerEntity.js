@@ -39,4 +39,8 @@ export default class MarkerEntity extends baseEntity {
         this.marker.rotation = rotation;
         this.setDirty();
     }
+
+    isInChapter(chapterIndex) {
+        return true;
+    }
 }
