@@ -10,3 +10,7 @@ export const LOCATIONS_LOADED = "LOACTION_LOADED";
 
 // Character Action Types
 export const CHARACTER_LOADED = "CHARACTER_LOADED";
+
+// Navigation Action Types
+export const NAV_ENTITY_SELECTED = "NAV_ENTITY_SELECTED";
+export const NAV_SELECTED = "NAV_SELECTED";

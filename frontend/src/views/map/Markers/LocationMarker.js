@@ -1,9 +1,10 @@
 import React from "react";
-import { Marker, Tooltip } from "react-leaflet";
+import { Tooltip } from "react-leaflet";
 import L from "leaflet";
 import { BACKEND_BASE_URL } from "../../../API/apiUtils";
+import EntityMarker from "./EntityMarker";
 
-const LocationMarker = ({ entity }) => {
+const LocationMarker = ({ entity, ...props }) => {
     const locationIcon = L.icon({
         iconUrl: BACKEND_BASE_URL + entity.marker.icon,
         iconSize: entity.marker.size, // size of the icon
@@ -11,11 +12,16 @@ const LocationMarker = ({ entity }) => {
     });
 
     return (
-        <Marker position={entity.position} icon={locationIcon}>
+        <EntityMarker
+            entity={entity}
+            position={entity.position}
+            icon={locationIcon}
+            {...props}
+        >
             <Tooltip offset={[entity.marker.anchor[0] + 5, 0]}>
                 {entity.name}
             </Tooltip>
-        </Marker>
+        </EntityMarker>
     );
 };
 

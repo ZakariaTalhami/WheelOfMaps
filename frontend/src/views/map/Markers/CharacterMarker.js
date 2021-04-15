@@ -1,8 +1,9 @@
 import React from "react";
-import { Marker, Tooltip } from "react-leaflet";
-import L from "leaflet";
-import { BACKEND_BASE_URL } from "../../../API/apiUtils";
 import { useSelector } from "react-redux";
+import { Tooltip } from "react-leaflet";
+import { BACKEND_BASE_URL } from "../../../API/apiUtils";
+import L from "leaflet";
+import EntityMarker from "./EntityMarker";
 
 const CharacterMarker = ({ entity }) => {
     const chapterIndex = useSelector(
@@ -22,14 +23,15 @@ const CharacterMarker = ({ entity }) => {
     }
 
     return (
-        <Marker
+        <EntityMarker
+            entity={entity}
             position={entity.getPosition(chapterIndex)}
             icon={characterIcon}
         >
             <Tooltip offset={[entity.marker.anchor[0] + 5, 0]}>
                 {entity.name}
             </Tooltip>
-        </Marker>
+        </EntityMarker>
     );
 };
 

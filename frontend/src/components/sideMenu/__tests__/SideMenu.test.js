@@ -2,48 +2,100 @@ import React from "react";
 import { fireEvent, render, screen, within } from "../../../utils/TestUtils";
 import { NAVIGATION } from "../navigation";
 import SideMenu from "../SideMenu";
+import { useSelector } from "react-redux";
+import { setSelectedNavigation } from "../../../actions/NavigationAction";
 
-beforeEach(() => render(<SideMenu />));
+const mockDispatch = jest.fn();
+jest.mock("react-redux", () => ({
+    useSelector: jest.fn(),
+    useDispatch: () => mockDispatch,
+}));
+
+const getMockState = (option = {}) => ({
+    Navigation: {
+        selectedEntity: option.entity || null,
+        selectedNavigation: option.nav || null,
+    },
+});
 
 test("renders", () => {
+    useSelector.mockImplementation((fn) => fn(getMockState()));
+
+    render(<SideMenu />);
+
     expect(screen.getByRole("navigation")).toBeDefined();
     expect(screen.getByTestId("side-drawer")).toBeDefined();
 });
 
-test("Clicking on the navigation link opens/closes the drawer", () => {
-    NAVIGATION.forEach((nav) => {
+describe("Clicking on the navigation link", () => {
+    test("Dispatches action with navigation name", () => {
+        useSelector.mockImplementation((fn) => fn(getMockState()));
+        render(<SideMenu />);
+
+        NAVIGATION.forEach((nav) => {
+            const navLink = screen.getByTitle(nav.label);
+
+            // Click on navigation link to open
+            fireEvent.click(navLink);
+
+            // Check dispatch call
+            expect(mockDispatch).toBeCalledWith(
+                setSelectedNavigation(nav.name)
+            );
+            mockDispatch.mockClear();
+        });
+    });
+
+    test("Selected link dispatches action with null", () => {
+        const nav = NAVIGATION[0];
+        const mockState = getMockState({ nav: nav.name });
+        useSelector.mockImplementation((fn) => fn(mockState));
+
+        render(<SideMenu />);
+
         const navLink = screen.getByTitle(nav.label);
-        const drawer = screen.getByTestId("side-drawer");
 
-        // Click on navigation link to open
         fireEvent.click(navLink);
-
-        // Check Drawer open
-        expect(drawer).toHaveStyle("transform: translate(0)");
 
         // Check Drawer content
-        expect(drawer).toContainHTML(nav.Content());
+        expect(mockDispatch).toBeCalledWith(setSelectedNavigation(null));
+    });
+});
 
-        // Click on navigation link to close
-        fireEvent.click(navLink);
+describe("Drawer open state depends on selected navigation", () => {
+    test("Drawer is closed when selected navigation is null", () => {
+        useSelector.mockImplementation((fn) => fn(getMockState()));
 
-        // Check Drawer closed
+        render(<SideMenu />);
+
+        const drawer = screen.getByTestId("side-drawer");
         expect(drawer).toHaveStyle("transform: translate(-170%)");
+    });
+
+    test("Drawer is opened when selected navigation is not null", () => {
+        const nav = NAVIGATION[0];
+        const mockState = getMockState({ nav: nav.name });
+        useSelector.mockImplementation((fn) => fn(mockState));
+
+        render(<SideMenu />);
+
+        const drawer = screen.getByTestId("side-drawer");
+        expect(drawer).toHaveStyle("transform: translate(0)");
     });
 });
 
 test("closed is called from drawer", () => {
+    const nav = NAVIGATION[0];
+    const mockState = getMockState({ nav: nav.name });
+    useSelector.mockImplementation((fn) => fn(mockState));
+
+    render(<SideMenu />);
+
     const drawer = screen.getByTestId("side-drawer");
-
-    // Click on navigation link to open
-    fireEvent.click(screen.getByTitle(NAVIGATION[0].label));
-
-    // Check Drawer open
-    expect(drawer).toHaveStyle("transform: translate(0)");
 
     // Click on the close button inside of the drawer
     fireEvent.click(within(drawer).getByRole("button"));
 
-    // Check Drawer closed
-    expect(drawer).toHaveStyle("transform: translate(-170%)");
+    // Remove selected navigation
+    expect(mockDispatch).toHaveBeenCalledWith(setSelectedNavigation(null));
 });

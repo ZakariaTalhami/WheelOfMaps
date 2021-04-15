@@ -1,8 +1,14 @@
-import React, { useState } from "react";
-import { Box } from "@chakra-ui/react";
-import Navbar from "./navbar/Navbar";
+// Core
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+// Config
 import { NAVIGATION } from "./navigation";
+// Redux Actions
+import { setSelectedNavigation } from "../../actions/NavigationAction";
+// Components
+import { Box } from "@chakra-ui/react";
 import Drawer from "./drawer/Drawer";
+import Navbar from "./navbar/Navbar";
 
 const SideMenuWrapper = (props) => (
     <Box
@@ -14,8 +20,14 @@ const SideMenuWrapper = (props) => (
     />
 );
 
-const SideMenu = (props) => {
-    const [currentNavigation, setCurrentNavigation] = useState(null);
+const SideMenu = () => {
+    const dispatch = useDispatch();
+    const currentNavigation = useSelector(
+        (state) => state.Navigation.selectedNavigation
+    );
+    const setCurrentNavigation = (navigation) =>
+        dispatch(setSelectedNavigation(navigation));
+
     const drawerContent = NAVIGATION.find(
         (nav) => nav.name === currentNavigation
     );
