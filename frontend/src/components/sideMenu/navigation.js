@@ -1,5 +1,6 @@
 import { FaFileAlt, FaCog, FaHandPointer } from "react-icons/fa";
 import PropTypes from "prop-types";
+import EntityViewer from "./entityViews/EntityViewer";
 
 export const CHAPTER_SUMMARY = "chapter-summary";
 export const SELECTED_SUMMARY = "selected-summary";
@@ -16,7 +17,7 @@ export const NAVIGATION = [
         name: SELECTED_SUMMARY,
         label: "Selected Summary",
         Icon: FaHandPointer,
-        Content: () => "Selected Summary",
+        Content: EntityViewer,
     },
     {
         name: SETTINGS,
