@@ -64,7 +64,7 @@ const DrawerHeader = (props) => (
 );
 
 const DrawerContent = (props) => (
-    <Box flex="1" w="100%" overflow="auto" {...props} />
+    <Box flex="1" w="100%" color="neutralColor" overflow="auto" {...props} />
 );
 
 const DrawerContentWrapper = (props) => (

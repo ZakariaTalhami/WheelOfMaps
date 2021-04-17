@@ -2,6 +2,7 @@ import { FaFileAlt, FaCog, FaHandPointer } from "react-icons/fa";
 import PropTypes from "prop-types";
 import EntityViewer from "./entityViews/EntityViewer";
 import ChapterSummary from "./ChapterSummary";
+import NotImplementedMessage from "./NotImplementedMessage";
 
 export const CHAPTER_SUMMARY = "chapter-summary";
 export const SELECTED_SUMMARY = "selected-summary";
@@ -24,7 +25,7 @@ export const NAVIGATION = [
         name: SETTINGS,
         label: "Settings",
         Icon: FaCog,
-        Content: () => "Settings",
+        Content: NotImplementedMessage,
     },
 ];
 

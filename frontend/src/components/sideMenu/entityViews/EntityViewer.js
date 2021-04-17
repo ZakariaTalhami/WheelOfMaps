@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import _ from "lodash";
 import Location from "../../../models/location";
 import Character from "../../../models/character";
-import { Center } from "@chakra-ui/react";
+import { Center, Heading } from "@chakra-ui/react";
 
 export const NO_SELECTION_MESSAGE = "Nothing Selected";
 
@@ -35,12 +35,8 @@ const EntityComponentMap = {
  * Component to display message when there isnt any selection
  */
 const NoneSelectedMessage = () => (
-    <Center
-        data-testid="no-selection-message"
-        fontSize="1.5rem"
-        fontWeight="bold"
-    >
-        {NO_SELECTION_MESSAGE}
+    <Center data-testid="no-selection-message">
+        <Heading size="lg">{NO_SELECTION_MESSAGE}</Heading>
     </Center>
 );
 
