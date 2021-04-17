@@ -1,9 +1,16 @@
+// Core
 import React from "react";
+// Libs
 import { useSelector } from "react-redux";
+// Utils
 import _ from "lodash";
+// Models
 import Location from "../../../models/location";
 import Character from "../../../models/character";
+// Components
 import { Center, Heading } from "@chakra-ui/react";
+import LocationView from "./LocationView";
+import CharacterView from "./CharacterView";
 
 export const NO_SELECTION_MESSAGE = "Nothing Selected";
 
@@ -27,8 +34,8 @@ const getClassName = (el) => {
  *  Mapping between Entity Type and its drawer component
  */
 const EntityComponentMap = {
-    [getClassName(Location)]: () => "Location Entity",
-    [getClassName(Character)]: () => "Character Entity",
+    [getClassName(Location)]: LocationView,
+    [getClassName(Character)]: CharacterView,
 };
 
 /**

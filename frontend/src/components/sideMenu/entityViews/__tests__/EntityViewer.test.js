@@ -6,12 +6,28 @@ import { useSelector } from "react-redux";
 // Mocks
 import mockLocation from "../../../../models/mocks/mockLocation";
 import mockCharacter from "../../../../models/mocks/mockCharacter";
+import LocationView from "../LocationView";
+import CharacterView from "../CharacterView";
 // Tested Component
 import EntityViewer, { NO_SELECTION_MESSAGE } from "../EntityViewer";
 
 jest.mock("react-redux", () => ({
     useSelector: jest.fn(),
 }));
+
+jest.mock("../LocationView");
+jest.mock("../CharacterView");
+
+const getMockState = (options = {}) => ({
+    Navigation: {
+        selectedEntity: options.entity,
+    },
+});
+
+beforeEach(() => {
+    LocationView.mockReturnValue("LocationView");
+    CharacterView.mockReturnValue("CharacterView");
+});
 
 test("Display message when nothing is selected", () => {
     render(<EntityViewer />);
@@ -21,17 +37,19 @@ test("Display message when nothing is selected", () => {
 });
 
 test("Renders the location component", () => {
-    useSelector.mockReturnValue(mockLocation);
+    const mockState = getMockState({ entity: mockLocation });
+    useSelector.mockImplementation((fn) => fn(mockState));
 
     render(<EntityViewer />);
 
-    expect(screen.getByText("Location Entity")).toBeDefined();
+    expect(screen.getByText("LocationView")).toBeDefined();
 });
 
 test("Renders the character component", () => {
-    useSelector.mockReturnValue(mockCharacter);
+    const mockState = getMockState({ entity: mockCharacter });
+    useSelector.mockImplementation((fn) => fn(mockState));
 
     render(<EntityViewer />);
 
-    expect(screen.getByText("Character Entity")).toBeDefined();
+    expect(screen.getByText("CharacterView")).toBeDefined();
 });
