@@ -63,7 +63,13 @@ const DrawerHeader = (props) => (
     </Flex>
 );
 
-const DrawerContentWrapper = (props) => <Box w="100%" h="100%" {...props} />;
+const DrawerContent = (props) => (
+    <Box flex="1" w="100%" overflow="auto" {...props} />
+);
+
+const DrawerContentWrapper = (props) => (
+    <Flex w="100%" h="100%" flexDir="column" {...props} />
+);
 
 const Drawer = ({ content, onClose }) => {
     const Content = content?.Content;
@@ -76,7 +82,7 @@ const Drawer = ({ content, onClose }) => {
         <Drawer open={!!content}>
             <DrawerContentWrapper>
                 <DrawerHeader onClose={onClose} />
-                {Content && <Content />}
+                <DrawerContent>{Content && <Content />}</DrawerContent>
             </DrawerContentWrapper>
         </Drawer>
     );

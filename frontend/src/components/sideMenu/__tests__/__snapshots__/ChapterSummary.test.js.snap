@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selected Chapter is defined Match snapshot when selected chapter is undefined 1`] = `
+<div>
+  <div
+    class="chakra-stack css-10e2phi"
+  >
+    <h2
+      class="chakra-heading css-1chwp2w"
+    >
+      Chapter 1: title
+    </h2>
+    <div
+      class="chakra-stack css-tlrjpm"
+    >
+      <p
+        class="chakra-text css-1u8qly9"
+        style="text-indent: 1.5rem;"
+      >
+        summary
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Selected Chapter is undefined Match snapshot 1`] = `
+<div>
+  <div
+    class="css-d85ps1"
+  >
+    <h2
+      class="chakra-heading css-rq7u43"
+    >
+      No Chapter selected
+    </h2>
+  </div>
+</div>
+`;

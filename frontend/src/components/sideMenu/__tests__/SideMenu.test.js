@@ -18,6 +18,13 @@ const getMockState = (option = {}) => ({
     },
 });
 
+// Mock the content component of navigations
+beforeEach(() => {
+    NAVIGATION.forEach((nav) => {
+        nav.Content = jest.fn().mockReturnValue("");
+    });
+});
+
 test("renders", () => {
     useSelector.mockImplementation((fn) => fn(getMockState()));
 

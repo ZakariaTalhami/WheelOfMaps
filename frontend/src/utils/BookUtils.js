@@ -2,14 +2,26 @@
     Uility module for common functionality for Books and chapters.
 */
 
-export const getBookChapterTitles = (book) => {
-    const chapters = book.chapters || [];
-    return chapters.map((chapter) => {
+/**
+ * Get the formated chapter title
+ * @param {Chapter} chapter
+ * @returns {String} chapter title
+ */
+export const getChapterTitle = (chapter) => {
+    let chapterTitle;
+
+    if (chapter) {
         const prefix =
             chapter.number === 0 ? "Prologue" : `Chapter ${chapter.number}`;
+        chapterTitle = `${prefix}: ${chapter.title}`;
+    }
 
-        return `${prefix}: ${chapter.title}`;
-    });
+    return chapterTitle;
+};
+
+export const getBookChapterTitles = (book) => {
+    const chapters = book.chapters || [];
+    return chapters.map(getChapterTitle);
 };
 
 /**
