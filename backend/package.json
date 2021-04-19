@@ -5,7 +5,9 @@
   "scripts": {
     "start": "npm run prod",
     "server": "node ./dist-server/app.js",
-    "dev": "SET NODE_ENV=development & npm-run-all build server",
+    "dev": "SET NODE_ENV=development& npm-run-all build server",
+    "prod": "NODE_ENV=production&& npm-run-all build server",
+    "prod:windows": "SET NODE_ENV=production& npm-run-all build server",
     "build": "npm-run-all clean transpile",
     "transpile": "babel ./server --out-dir dist-server",
     "clean": "rimraf dist-server",

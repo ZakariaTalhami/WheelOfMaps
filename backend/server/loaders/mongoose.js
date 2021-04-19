@@ -5,8 +5,18 @@ export default async () => {
     const DB_HOST = process.env.DB_HOST;
     const DB_PORT = process.env.DB_PORT;
 
+    let DB_ADDRESS = "mongodb";
+    if (!DB_PORT) {
+        DB_ADDRESS += "+srv";
+    }
+    DB_ADDRESS += `://${DB_HOST}`;
+    if (DB_PORT) {
+        DB_ADDRESS += `:${DB_PORT}`;
+    }
+
+    console.log(`Connecting to ${DB_ADDRESS}`);
     try {
-        await mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}`, {
+        await mongoose.connect(DB_ADDRESS, {
             useCreateIndex: true,
             useNewUrlParser: true,
             useUnifiedTopology: true,

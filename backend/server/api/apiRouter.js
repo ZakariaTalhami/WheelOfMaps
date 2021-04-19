@@ -1,7 +1,7 @@
 import { Router } from "express";
-import bookRouter from "./book/routes";
-import locationRouter from "./location/routes";
-import characterRouter from "./character/routes";
+import bookRouter from "./Book/routes";
+import locationRouter from "./Location/routes";
+import characterRouter from "./Character/routes";
 
 const router = Router();
 

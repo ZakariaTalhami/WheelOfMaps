@@ -1,14 +1,13 @@
 import React from "react";
 import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import { BACKEND_BASE_URL } from "../../API/apiUtils";
 import MarkerGenerator from "./MarkerGenerator";
 
 const PADDING = 10;
-const BACKEND_HOST = process.env.REACT_APP_BACKEND_HOST;
-const BACKEND_PORT = process.env.REACT_APP_BACKEND_PORT;
 
 const Map = () => {
     const getMapTileLocation = () => {
-        return `http://${BACKEND_HOST}:${BACKEND_PORT}/tiles/{z}/{y}/{x}.jpg`;
+        return `${BACKEND_BASE_URL}/tiles/{z}/{y}/{x}.jpg`;
     };
 
     return (
@@ -40,7 +39,7 @@ const Map = () => {
 };
 
 function MapEvents() {
-    const map = useMapEvents({
+    useMapEvents({
         click: (e) => {
             console.log(
                 `${e.latlng.lat.toFixed(2)}, ${e.latlng.lng.toFixed(2)}`

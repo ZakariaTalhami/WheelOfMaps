@@ -70,6 +70,8 @@
         "statements": 80
       }
     },
-    "coverageReporters": ["text"]
+    "coverageReporters": [
+      "text"
+    ]
   }
 }
