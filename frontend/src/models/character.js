@@ -2,11 +2,13 @@ import { isInChapterRange } from "../utils/BookUtils";
 import CharacterMarker from "../views/map/Markers/CharacterMarker";
 import MarkerEntity from "./markerEntity";
 import _ from "lodash";
+import { CHARACTER_ENTITY } from "./entityTypes";
 
 export default class Character extends MarkerEntity {
     name;
     position = [];
     chapterSummary = {};
+    entityType = CHARACTER_ENTITY;
 
     constructor(characterId, name, position, chapterSummary, marker) {
         super(characterId, marker);

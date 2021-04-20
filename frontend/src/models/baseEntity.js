@@ -9,6 +9,7 @@ export default class baseEntity {
     #isDirty = false;
     #isNew = false;
     _id;
+    entityType;
 
     constructor(_id) {
         this.#isNew = !_id;

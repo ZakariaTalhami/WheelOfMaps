@@ -2,11 +2,13 @@ import MarkerEntity from "./markerEntity";
 import LocationMarker from "../views/map/Markers/LocationMarker";
 import { isInChapterRange } from "../utils/BookUtils";
 import _ from "lodash";
+import { LOCATION_ENTITY } from "./entityTypes";
 
 export default class Location extends MarkerEntity {
     name;
     position;
     description;
+    entityType = LOCATION_ENTITY;
 
     constructor(locationId, name, position, description, marker) {
         super(locationId, marker);

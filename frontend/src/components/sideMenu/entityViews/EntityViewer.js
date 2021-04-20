@@ -11,31 +11,28 @@ import Character from "../../../models/character";
 import { Center, Heading } from "@chakra-ui/react";
 import LocationView from "./LocationView";
 import CharacterView from "./CharacterView";
+import { CHARACTER_ENTITY, LOCATION_ENTITY } from "../../../models/entityTypes";
 
 export const NO_SELECTION_MESSAGE = "Nothing Selected";
+
+/**
+ *  Mapping between Entity Type and its drawer component
+ */
+const EntityComponentMap = {
+    [LOCATION_ENTITY]: LocationView,
+    [CHARACTER_ENTITY]: CharacterView,
+};
 
 /**
  * Get the class name of element
  * @param {Object|Class} el - Element to get its class
  * @returns {String} class name or undefined
  */
-const getClassName = (el) => {
+const getEntityComponent = (el) => {
     if (el) {
-        if (/^\s*class/.test(el.toString())) {
-            return el.prototype.constructor.name;
-        } else if (_.isObject(el)) {
-            return el.constructor.name;
-        }
+        return EntityComponentMap[el.entityType];
     }
     return undefined;
-};
-
-/**
- *  Mapping between Entity Type and its drawer component
- */
-const EntityComponentMap = {
-    [getClassName(Location)]: LocationView,
-    [getClassName(Character)]: CharacterView,
 };
 
 /**
@@ -51,8 +48,7 @@ const EntityViewer = () => {
     const selectedEntity = useSelector(
         (state) => state.Navigation.selectedEntity
     );
-    const Component =
-        EntityComponentMap[getClassName(selectedEntity)] || NoneSelectedMessage;
+    const Component = getEntityComponent(selectedEntity) || NoneSelectedMessage;
 
     return <Component entity={selectedEntity} />;
 };
