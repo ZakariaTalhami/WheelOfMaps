@@ -38,6 +38,7 @@ const DrawerWraper = (props) => (
 const MobileDrawerWrapper = (props) => (
     <Flex
         data-testid="side-drawer-mobile"
+        zIndex="1"
         pos="fixed"
         width="85%"
         height="85%"
