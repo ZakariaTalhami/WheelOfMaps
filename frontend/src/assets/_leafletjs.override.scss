@@ -29,3 +29,55 @@
         border-right-color: adjust-color($neutral-color, $alpha: -0.2);
     }
 }
+
+.leaflet-bottom,
+.leaflet-top {
+    z-index: 499;
+}
+
+.leaflet-bottom {
+    bottom: 82px !important;
+
+    @media (max-width: 480px) {
+        bottom: 114px !important;
+    }
+}
+
+.leaflet-control-zoom.leaflet-bar {
+    border: none;
+
+    a.leaflet-control-zoom-in,
+    a.leaflet-control-zoom-out {
+        width      : 50px;
+        height     : 50px;
+        line-height: 50px;
+        font-size  : 1.8rem;
+        font-family: 'Roboto', sans-serif !important;
+
+        background-color: $primary-color;
+        color           : $neutral-color;
+
+
+        &.leaflet-disabled {
+            color: #635E5E;
+
+            &:hover {
+                background-color: $primary-color;
+            }
+        }
+
+        &:hover {
+            background-color: #B8AD8E;
+        }
+
+        &:first-child {
+            border-top-left-radius : 50%;
+            border-top-right-radius: 50%;
+        }
+
+        &:last-child {
+            border-bottom-left-radius : 50%;
+            border-bottom-right-radius: 50%;
+        }
+    }
+}

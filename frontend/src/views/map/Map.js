@@ -1,5 +1,10 @@
 import React from "react";
-import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import {
+    MapContainer,
+    TileLayer,
+    useMapEvents,
+    ZoomControl,
+} from "react-leaflet";
 import { BACKEND_BASE_URL } from "../../API/apiUtils";
 import MarkerGenerator from "./MarkerGenerator";
 
@@ -34,6 +39,8 @@ const Map = () => {
             />
             <MapEvents />
             <MarkerGenerator />
+            {/* Positioned at the top because of scrolling issue in mobile */}
+            <ZoomControl position="topright" style={{ marginBottom: "50px" }} />
         </MapContainer>
     );
 };
