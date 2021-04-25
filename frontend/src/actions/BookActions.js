@@ -1,5 +1,16 @@
+// Libs
 import axios from "axios";
-import { BOOK_SELECTED, CHAPTER_SELECTED, BOOKS_LOADED } from "./types";
+// Action types
+import {
+    BOOK_SELECTED,
+    CHAPTER_SELECTED,
+    BOOKS_LOADED,
+    NEXT_CHAPTER,
+    BACK_CHAPTER,
+} from "./types";
+
+export const nextChapter = () => ({ type: NEXT_CHAPTER });
+export const previousChapter = () => ({ type: BACK_CHAPTER });
 
 export const setSelectedBook = (bookTitle) => ({
     type: BOOK_SELECTED,
@@ -11,6 +22,7 @@ export const setSelectedChapter = (chapterIndex) => ({
     index: chapterIndex,
 });
 
+// TODO: handle error responses
 export const loadBooks = () => (dispatch) => {
     return axios
         .get("book")

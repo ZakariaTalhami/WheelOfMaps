@@ -17,8 +17,15 @@ export default async ({ app }) => {
     app.use(bodyParser.json());
     app.use(express.static(path.join(__dirname, "../../public")));
 
+    // Host the frontend in production
+    if (process.env.NODE_ENV === "production") {
+        app.use(
+            express.static(path.join(__dirname, "../../../frontend/build"))
+        );
+    }
+
     //  Include the router
-    app.use("/", indexRouter);
+    app.use("/api/", indexRouter);
 
     // catch 404 and forward to error handler
     app.use((req, res, next) => {

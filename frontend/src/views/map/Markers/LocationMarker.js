@@ -1,22 +1,27 @@
 import React from "react";
-import { Marker, Tooltip } from "react-leaflet";
+import { Tooltip } from "react-leaflet";
 import L from "leaflet";
+import { BACKEND_BASE_URL } from "../../../API/apiUtils";
+import EntityMarker from "./EntityMarker";
 
-const LocationMarker = (props) => {
-    console.log(props.name);
-
+const LocationMarker = ({ entity, ...props }) => {
     const locationIcon = L.icon({
-        iconUrl: "http://localhost:8000" + props.marker.icon,
-        iconSize: props.marker.size, // size of the icon
-        iconAnchor: props.marker.anchor, // point of the icon which will correspond to marker's location
+        iconUrl: BACKEND_BASE_URL + entity.marker.icon,
+        iconSize: entity.marker.size, // size of the icon
+        iconAnchor: entity.marker.anchor, // point of the icon which will correspond to marker's location
     });
 
     return (
-        <Marker position={props.position} icon={locationIcon}>
-            <Tooltip offset={[props.marker.anchor[0] + 5, 0]}>
-                {props.name}
+        <EntityMarker
+            entity={entity}
+            position={entity.position}
+            icon={locationIcon}
+            {...props}
+        >
+            <Tooltip offset={[entity.marker.anchor[0] + 5, 0]}>
+                {entity.name}
             </Tooltip>
-        </Marker>
+        </EntityMarker>
     );
 };
 

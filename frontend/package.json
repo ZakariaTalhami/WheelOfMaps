@@ -32,6 +32,7 @@
     "start": "set PORT=5000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "tests": "react-scripts test --changedSince master",
     "test:coverage": "react-scripts test --coverage",
     "testAll": "react-scripts test --watchAll",
     "testAll:coverage": "react-scripts test --watchAll --coverage",
@@ -69,6 +70,8 @@
         "statements": 80
       }
     },
-    "coverageReporters": ["text"]
+    "coverageReporters": [
+      "text"
+    ]
   }
 }

@@ -1,11 +1,11 @@
+// Core
 import React from "react";
-import {
-    setSelectedBook,
-    setSelectedChapter,
-} from "../../../../actions/BookActions";
 import { fireEvent, render, screen } from "../../../../utils/TestUtils";
-import Timeline from "../Timeline";
 import { useSelector } from "react-redux";
+// Action Types
+import { nextChapter, previousChapter } from "../../../../actions/BookActions";
+// Tested components
+import Timeline from "../Timeline";
 
 const MOCK_BOOKS = {
     "Book 1": {
@@ -63,72 +63,20 @@ test("renders", () => {
     expect(screen.getByTestId("chapter-select")).toBeDefined();
 });
 
-test("handle back action - stop at first book", () => {
+test("clicking back button dispatchs back action", () => {
     render(<Timeline />);
 
     fireEvent.click(screen.getByTestId("back-button"));
 
-    expect(mockDispatch).not.toHaveBeenCalled();
+    expect(mockDispatch).toHaveBeenCalledWith(previousChapter());
 });
 
-test("handle back action - goes to previous book", () => {
-    useSelector.mockReturnValue({
-        ...MOCK_BOOK_STATE,
-        selectedBook: "Book 2",
-    });
-
-    render(<Timeline />);
-
-    fireEvent.click(screen.getByTestId("back-button"));
-
-    expect(mockDispatch).toHaveBeenCalledWith(setSelectedBook("Book 1"));
-});
-
-test("handle back action - goes to previous chapter", () => {
-    useSelector.mockReturnValue({
-        ...MOCK_BOOK_STATE,
-        selectedChapter: 1,
-    });
-    render(<Timeline />);
-
-    fireEvent.click(screen.getByTestId("back-button"));
-
-    expect(mockDispatch).toHaveBeenCalledWith(setSelectedChapter(0));
-});
-
-test("handle next action - stop at last book and chapter", () => {
-    useSelector.mockReturnValue({
-        ...MOCK_BOOK_STATE,
-        selectedBook: "Book 2",
-        selectedChapter: 1,
-    });
-
+test("clicking next button dispatchs next action", () => {
     render(<Timeline />);
 
     fireEvent.click(screen.getByTestId("next-button"));
 
-    expect(mockDispatch).not.toHaveBeenCalled();
-});
-
-test("handle next action - goes to next book", () => {
-    useSelector.mockReturnValue({
-        ...MOCK_BOOK_STATE,
-        selectedChapter: 1,
-    });
-
-    render(<Timeline />);
-
-    fireEvent.click(screen.getByTestId("next-button"));
-
-    expect(mockDispatch).toHaveBeenCalledWith(setSelectedBook("Book 2"));
-});
-
-test("handle next action - goes to next chapter", () => {
-    render(<Timeline />);
-
-    fireEvent.click(screen.getByTestId("next-button"));
-
-    expect(mockDispatch).toHaveBeenCalledWith(setSelectedChapter(1));
+    expect(mockDispatch).toHaveBeenCalledWith(nextChapter());
 });
 
 test("match snapshot", () => {

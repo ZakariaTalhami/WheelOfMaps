@@ -2,10 +2,7 @@
 import React from "react";
 
 // Redux Actions
-import {
-    setSelectedBook,
-    setSelectedChapter,
-} from "../../../actions/BookActions";
+import { nextChapter, previousChapter } from "../../../actions/BookActions";
 
 // Components
 import BookCrumbs from "./bookCrumbs/BookCrumbs";
@@ -20,34 +17,11 @@ const Timeline = () => {
     const dispatch = useDispatch();
 
     const handleBack = () => {
-        if (bookState.selectedChapter - 1 > -1) {
-            // Go to the previous chapter
-            dispatch(setSelectedChapter(bookState.selectedChapter - 1));
-        } else {
-            // Go to the previous book
-            const bookTitles = Object.keys(bookState.books);
-            const bookIndex = bookTitles.indexOf(bookState.selectedBook);
-            if (bookIndex - 1 > -1) {
-                dispatch(setSelectedBook(bookTitles[bookIndex - 1]));
-            }
-        }
+        dispatch(previousChapter());
     };
 
     const handleNext = () => {
-        if (
-            bookState.selectedChapter + 1 <
-            bookState.books[bookState.selectedBook].chapters.length
-        ) {
-            // Go to the next chapter
-            dispatch(setSelectedChapter(bookState.selectedChapter + 1));
-        } else {
-            // Go to the next book
-            const bookTitles = Object.keys(bookState.books);
-            const bookIndex = bookTitles.indexOf(bookState.selectedBook);
-            if (bookIndex + 1 < bookTitles.length) {
-                dispatch(setSelectedBook(bookTitles[bookIndex + 1]));
-            }
-        }
+        dispatch(nextChapter());
     };
 
     return (
