@@ -37,7 +37,7 @@ describe("Selected Chapter is defined", () => {
         render(<ChapterSummary />);
 
         expect(screen.getByText(getChapterTitle(mockChapter))).toBeDefined();
-        expect(screen.getByText(mockChapter.summary)).toBeDefined();
+        expect(screen.getByText(mockChapter.summary.body)).toBeDefined();
     });
 
     test("Match snapshot when selected chapter is undefined", () => {

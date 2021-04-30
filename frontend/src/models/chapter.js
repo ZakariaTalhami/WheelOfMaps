@@ -22,6 +22,7 @@ export default class Chapter extends baseEntity {
             chapterObj._id,
             chapterObj.number,
             chapterObj.title,
+            // TODO: Create a model for summary
             chapterObj.summary,
             chapterObj.chapterIndex
         );

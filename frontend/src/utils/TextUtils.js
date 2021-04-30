@@ -8,7 +8,12 @@ import { Text } from "@chakra-ui/react";
 export const getSummaryParagraphs = (summary) => {
     const paragraphs = summary.split("\r\n\r\n");
     return paragraphs.map((para, index) => (
-        <Text role="paragraph" style={{ textIndent: "1.5rem" }} key={index}>
+        <Text
+            w="100%"
+            role="paragraph"
+            style={{ textIndent: "1.5rem" }}
+            key={index}
+        >
             {para}
         </Text>
     ));
