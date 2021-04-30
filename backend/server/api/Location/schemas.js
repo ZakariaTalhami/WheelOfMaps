@@ -1,7 +1,24 @@
 import { Schema, model } from "mongoose";
 import { CHAPTER_RANGE_SCHEMA } from "../../utils/Constants";
+import CreditModel from "../common/CreditModel";
 import MarkerModel from "../common/MarkerModel";
 
+/**
+ * Location Description Schema
+ */
+const LocationDescriptionSchema = new Schema({
+    chapterRange: CHAPTER_RANGE_SCHEMA,
+    description: {
+        type: String,
+        required: true,
+    },
+});
+
+LocationDescriptionSchema.plugin(CreditModel);
+
+/**
+ * Location Schema
+ */
 const LocationSchema = new Schema({
     name: {
         type: String,
@@ -13,15 +30,7 @@ const LocationSchema = new Schema({
         minlength: 2,
         maxlength: 2,
     },
-    description: [
-        new Schema({
-            chapterRange: CHAPTER_RANGE_SCHEMA,
-            description: {
-                type: String,
-                required: true,
-            },
-        }),
-    ],
+    description: [LocationDescriptionSchema],
 });
 
 LocationSchema.plugin(MarkerModel);

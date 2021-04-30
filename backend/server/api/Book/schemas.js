@@ -10,7 +10,7 @@ const ChapterSchema = new Schema({
         type: String,
     },
     summary: {
-        type: String,
+        type: Object,
         default: "",
     },
     chapterIndex: {

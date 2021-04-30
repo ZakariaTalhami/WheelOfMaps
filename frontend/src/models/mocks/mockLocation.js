@@ -9,6 +9,10 @@ const MOCk_LOCATION = {
         {
             chapterRange: "01005-01010",
             description: "desciptio\r\n\r\ndesciption",
+            credit: {
+                link: "link/to/description",
+                author: "author of description",
+            },
         },
     ],
     marker: MOCK_MARKER,

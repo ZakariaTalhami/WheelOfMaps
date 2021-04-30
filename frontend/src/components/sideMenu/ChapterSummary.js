@@ -3,6 +3,7 @@ import React from "react";
 //Components
 import { Center, Heading, VStack } from "@chakra-ui/react";
 import { DrawerHeader, DrawerContentWrapper } from "./drawer/DrawerContent";
+import CreditLink from "../creditLink/CreditLink";
 // Hooks
 import useGetSelectedChapter from "../../hooks/useGetSelectedChapter";
 // Utils
@@ -20,7 +21,7 @@ const NoChapterSummarySelected = () => (
 
 const ChapterSummary = () => {
     const chapter = useGetSelectedChapter();
-
+    const summary = chapter?.summary;
     return (
         <>
             {!chapter ? (
@@ -29,7 +30,11 @@ const ChapterSummary = () => {
                 <VStack h="100%">
                     <DrawerHeader>{getChapterTitle(chapter)}</DrawerHeader>
                     <DrawerContentWrapper>
-                        {getSummaryParagraphs(chapter.summary)}
+                        {getSummaryParagraphs(summary.body)}
+                        <CreditLink
+                            author={summary.author}
+                            link={summary.link}
+                        />
                     </DrawerContentWrapper>
                 </VStack>
             )}

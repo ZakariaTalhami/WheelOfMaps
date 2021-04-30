@@ -45,3 +45,9 @@ test("doesnt find description for selected chapter", () => {
     expect(within(header).getByText(mockLocation.name)).toBeDefined();
     expect(paragraphs.length).toEqual(0);
 });
+
+test("Matches the snapshot", () => {
+    const { container } = render(<LocationView entity={mockLocation} />);
+
+    expect(container).toMatchSnapshot();
+});
