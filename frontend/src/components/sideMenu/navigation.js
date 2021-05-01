@@ -6,7 +6,18 @@ import NotImplementedMessage from "./NotImplementedMessage";
 
 export const CHAPTER_SUMMARY = "chapter-summary";
 export const SELECTED_SUMMARY = "selected-summary";
+export const PIZZA = "PIZZA";
 export const SETTINGS = "settings";
+
+const getDevNavigation = () => {
+    let devNavigation = [];
+
+    if (process.env.NODE_ENV === "development") {
+        devNavigation = [];
+    }
+
+    return devNavigation;
+};
 
 export const NAVIGATION = [
     {
@@ -27,6 +38,7 @@ export const NAVIGATION = [
         Icon: FaCog,
         Content: NotImplementedMessage,
     },
+    ...getDevNavigation(),
 ];
 
 export const NavigationType = PropTypes.shape({
