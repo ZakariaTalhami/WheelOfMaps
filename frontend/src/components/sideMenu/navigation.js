@@ -8,6 +8,16 @@ export const CHAPTER_SUMMARY = "chapter-summary";
 export const SELECTED_SUMMARY = "selected-summary";
 export const SETTINGS = "settings";
 
+const getDevNavigation = () => {
+    let devNavigation = [];
+
+    if (process.env.NODE_ENV === "development") {
+        devNavigation = [];
+    }
+
+    return devNavigation;
+};
+
 export const NAVIGATION = [
     {
         name: CHAPTER_SUMMARY,
@@ -27,6 +37,7 @@ export const NAVIGATION = [
         Icon: FaCog,
         Content: NotImplementedMessage,
     },
+    ...getDevNavigation(),
 ];
 
 export const NavigationType = PropTypes.shape({
