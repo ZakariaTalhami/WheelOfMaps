@@ -1,22 +1,52 @@
-import { FaFileAlt, FaCog, FaHandPointer } from "react-icons/fa";
+import {
+    FaFileAlt,
+    FaCog,
+    FaHandPointer,
+    FaPen,
+    FaBookMedical,
+    FaBookOpen,
+} from "react-icons/fa";
 import PropTypes from "prop-types";
 import EntityViewer from "./entityViews/EntityViewer";
 import ChapterSummary from "./ChapterSummary";
 import NotImplementedMessage from "./NotImplementedMessage";
 
-export const CHAPTER_SUMMARY = "chapter-summary";
-export const SELECTED_SUMMARY = "selected-summary";
-export const SETTINGS = "settings";
+export const CHAPTER_FORM = "chapter-form";
+export const BOOK_FORM = "book-form";
+export const SELECTED_FORM = "selected-form";
 
 const getDevNavigation = () => {
     let devNavigation = [];
 
     if (process.env.NODE_ENV === "development") {
-        devNavigation = [];
+        devNavigation = [
+            {
+                name: SELECTED_FORM,
+                label: "Selected Form",
+                Icon: FaPen,
+                Content: () => "Selected Form",
+            },
+            {
+                name: BOOK_FORM,
+                label: "Book Form",
+                Icon: FaBookMedical,
+                Content: () => "Book Form",
+            },
+            {
+                name: CHAPTER_FORM,
+                label: "Chapter Form",
+                Icon: FaBookOpen,
+                Content: () => "Chapter Form",
+            },
+        ];
     }
 
     return devNavigation;
 };
+
+export const CHAPTER_SUMMARY = "chapter-summary";
+export const SELECTED_SUMMARY = "selected-summary";
+export const SETTINGS = "settings";
 
 export const NAVIGATION = [
     {
