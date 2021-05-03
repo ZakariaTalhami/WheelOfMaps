@@ -1,56 +1,31 @@
 import { Router } from "express";
-import {
-    CreateBook,
-    CreateChapter,
-    ListBook,
-    FetchBook,
-    DeleteBook,
-    UpdateBook,
-} from "./controllers";
-import { celebrate, Joi } from "celebrate";
+// Controllers
+import BookController, { CreateChapter } from "./controllers";
+// Middleware
 import { skipMethod } from "../../utils/MiddlewareUtils";
+import {
+    bookValidationMiddleware,
+    chapterValidationMiddleware,
+} from "./validators";
 
 // Create the express Router
 const router = Router();
 
-// Validation Middleware
-const chapterValidationObj = Joi.object({
-    // TODO: When the Prologue is handled this
-    // should be a set with min of 1
-    number: Joi.number().integer().required(),
-    title: Joi.string().required(),
-    summary: Joi.string(),
-    // TODO: this shouldnt be set by the user
-    chapterIndex: Joi.string().required(),
-});
-
-const chapterValidationMiddleware = celebrate({
-    body: chapterValidationObj,
-});
-
-const bookValidationMiddleware = celebrate({
-    body: Joi.object({
-        title: Joi.string().required(),
-        series: Joi.string().required(),
-        seriesIndex: Joi.number().integer().min(0).required(),
-        author: Joi.string().required(),
-        publishDate: Joi.date().required(),
-        chapters: Joi.array().items(chapterValidationObj),
-    }),
-});
-
-// Routes
-
 /*
  *   Book CRUD operations
  */
-router.route("/").all(bookValidationMiddleware).post(CreateBook).get(ListBook);
 router
-    .route("/:bookID")
+    .route("/")
+    .all(bookValidationMiddleware)
+    .post(BookController.create)
+    .get(BookController.list);
+
+router
+    .route(`/:${BookController.lookUpKey}`)
     .all(skipMethod(bookValidationMiddleware, ["DELETE"]))
-    .get(FetchBook)
-    .put(UpdateBook)
-    .delete(DeleteBook);
+    .get(BookController.getById)
+    .put(BookController.update)
+    .delete(BookController.delete);
 
 /*
  *   Book's Chapter CRUD operations

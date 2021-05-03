@@ -1,18 +1,8 @@
-import {
-    createModelAPIHandler,
-    deleteModelAPIHandler,
-    fetchModelAPIHandler,
-    listModelAPIHandler,
-    updateModelAPIHandler,
-} from "../../utils/GenericAPIHandlers";
 import { Book, Chapter } from "./schemas";
 import BookService from "./bookService";
+import GenericCRUDController from "../GenericCRUDController";
 
-export const ListBook = listModelAPIHandler(BookService);
-export const CreateBook = createModelAPIHandler(Book);
-export const FetchBook = fetchModelAPIHandler(Book, "bookID");
-export const UpdateBook = updateModelAPIHandler(Book, "bookID");
-export const DeleteBook = deleteModelAPIHandler(Book, "bookID");
+export const BOOK_ID_LOOKUP = "bookID";
 
 export const CreateChapter = async (req, res) => {
     const bookId = req.params.bookID;
@@ -29,3 +19,7 @@ export const CreateChapter = async (req, res) => {
         });
     }
 };
+
+export class BookController extends GenericCRUDController {}
+
+export default new BookController(BookService, BOOK_ID_LOOKUP);
