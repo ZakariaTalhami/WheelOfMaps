@@ -28,4 +28,12 @@ export default class BookService {
             }
         );
     }
+
+    static async addChapter(bookId, chapterDto) {
+        return await Book.findOneAndUpdate(
+            { _id: bookId },
+            { $push: { chapters: chapterDto } },
+            { new: true }
+        );
+    }
 }

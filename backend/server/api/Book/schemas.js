@@ -59,14 +59,6 @@ const BookSchema = new Schema({
 // Series and SeriesIndex need to be unique
 BookSchema.index({ series: 1, seriesIndex: 1 }, { unique: true });
 
-BookSchema.statics.AddChapter = function (bookId, chapter) {
-    return this.findOneAndUpdate(
-        { _id: bookId },
-        { $push: { chapters: chapter } },
-        { new: true }
-    );
-};
-
 const Book = model("Book", BookSchema);
 const Chapter = model("Chapter", ChapterSchema);
 

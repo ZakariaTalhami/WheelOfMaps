@@ -2,7 +2,6 @@ import Binder from "../utils/Binder";
 
 class GenericCRUDController {
     constructor(EntityModel, lookUpKey) {
-        console.log(EntityModel);
         if (!EntityModel) {
             throw "Entity Model must be defined";
         }
@@ -13,8 +12,6 @@ class GenericCRUDController {
     }
 
     async list(req, res) {
-        console.log("List");
-        console.log(this);
         try {
             const objList = await this.entity.all();
             res.status(200);
