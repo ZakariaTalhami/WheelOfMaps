@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+// Components
 import {
     FaFileAlt,
     FaCog,
@@ -6,10 +8,11 @@ import {
     FaBookMedical,
     FaBookOpen,
 } from "react-icons/fa";
-import PropTypes from "prop-types";
 import EntityViewer from "./entityViews/EntityViewer";
-import ChapterSummary from "./ChapterSummary";
 import NotImplementedMessage from "./NotImplementedMessage";
+import ChapterSummary from "./ChapterSummary";
+import ChapterForm from "./developementEditor/EntityForms/ChapterForm";
+import BookForm from "./developementEditor/EntityForms/BookForm";
 
 export const CHAPTER_FORM = "chapter-form";
 export const BOOK_FORM = "book-form";
@@ -30,13 +33,13 @@ const getDevNavigation = () => {
                 name: BOOK_FORM,
                 label: "Book Form",
                 Icon: FaBookMedical,
-                Content: () => "Book Form",
+                Content: ChapterForm,
             },
             {
                 name: CHAPTER_FORM,
                 label: "Chapter Form",
                 Icon: FaBookOpen,
-                Content: () => "Chapter Form",
+                Content: BookForm,
             },
         ];
     }
