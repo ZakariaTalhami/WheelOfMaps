@@ -1,10 +1,10 @@
 // Core
 import React from "react";
 // Libs
-import { render, screen, within } from "../../../../utils/TestUtils";
+import { render, screen, within } from "../../../../../utils/TestUtils";
 import { useSelector } from "react-redux";
 // Mocks
-import mockLocation from "../../../../models/mocks/mockLocation";
+import mockLocation from "../../../../../models/mocks/mockLocation";
 // Tested Component
 import LocationView from "../LocationView";
 

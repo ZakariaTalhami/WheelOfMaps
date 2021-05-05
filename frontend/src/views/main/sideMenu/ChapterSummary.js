@@ -3,12 +3,12 @@ import React from "react";
 //Components
 import { Center, Heading, VStack } from "@chakra-ui/react";
 import { DrawerHeader, DrawerContentWrapper } from "./drawer/DrawerContent";
-import CreditLink from "../creditLink/CreditLink";
+import CreditLink from "../../../components/creditLink/CreditLink";
 // Hooks
-import useGetSelectedChapter from "../../hooks/useGetSelectedChapter";
+import useGetSelectedChapter from "../../../hooks/useGetSelectedChapter";
 // Utils
-import { getChapterTitle } from "../../utils/BookUtils";
-import { getSummaryParagraphs } from "../../utils/TextUtils";
+import { getSummaryParagraphs } from "../../../utils/TextUtils";
+import { getChapterTitle } from "../../../utils/BookUtils";
 
 /**
  * not chpater selected message component

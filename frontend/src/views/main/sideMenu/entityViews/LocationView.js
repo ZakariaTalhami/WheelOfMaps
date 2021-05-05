@@ -3,11 +3,11 @@ import React from "react";
 // Libs
 import { useSelector } from "react-redux";
 // Utils
-import { getSummaryParagraphs } from "../../../utils/TextUtils";
+import { getSummaryParagraphs } from "../../../../utils/TextUtils";
 // Components
 import { VStack } from "@chakra-ui/react";
 import { DrawerContentWrapper, DrawerHeader } from "../drawer/DrawerContent";
-import CreditLink from "../../creditLink/CreditLink";
+import CreditLink from "../../../../components/creditLink/CreditLink";
 
 const LocationView = ({ entity }) => {
     const selectedChpaterIndex = useSelector((state) => {

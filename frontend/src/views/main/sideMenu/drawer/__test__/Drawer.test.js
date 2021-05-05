@@ -1,7 +1,7 @@
 // Core
 import React from "react";
 // Libs
-import { fireEvent, render, screen } from "../../../../utils/TestUtils";
+import { fireEvent, render, screen } from "../../../../../utils/TestUtils";
 import { useBreakpointValue } from "@chakra-ui/react";
 // Tested Component
 import Drawer from "../Drawer";

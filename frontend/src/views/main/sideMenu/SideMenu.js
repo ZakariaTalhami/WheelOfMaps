@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // Config
 import { NAVIGATION } from "./navigation";
 // Redux Actions
-import { setSelectedNavigation } from "../../actions/NavigationAction";
+import { setSelectedNavigation } from "../../../actions/NavigationAction";
 // Components
 import { Box } from "@chakra-ui/react";
 import Drawer from "./drawer/Drawer";

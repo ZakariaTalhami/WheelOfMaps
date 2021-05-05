@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen } from "../../../../utils/TestUtils";
+import { fireEvent, render, screen } from "../../../../../utils/TestUtils";
 import { NAVIGATION } from "../../navigation";
 import Navbar from "../Navbar";
 

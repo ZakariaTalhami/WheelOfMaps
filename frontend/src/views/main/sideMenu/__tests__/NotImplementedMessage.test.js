@@ -1,7 +1,7 @@
 // Core
 import React from "react";
 // Libs
-import { render, screen } from "../../../utils/TestUtils";
+import { render, screen } from "../../../../utils/TestUtils";
 import NotImplementedMessage from "../NotImplementedMessage";
 
 test("Renders", () => {
