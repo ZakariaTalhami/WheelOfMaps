@@ -9,7 +9,8 @@ import mockCharacter from "../../../../../models/mocks/mockCharacter";
 import LocationView from "../LocationView";
 import CharacterView from "../CharacterView";
 // Tested Component
-import EntityViewer, { NO_SELECTION_MESSAGE } from "../EntityViewer";
+import EntityViewer from "../EntityViewer";
+import { NO_SELECTION_MESSAGE } from "../../../../../components/entityFactory/EntityViewFactory";
 
 jest.mock("react-redux", () => ({
     useSelector: jest.fn(),

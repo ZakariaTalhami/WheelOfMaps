@@ -1,4 +1,5 @@
 import baseEntity from "./baseEntity";
+import { CHAPTER_ENTITY } from "./entityTypes";
 
 export default class Chapter extends baseEntity {
     #bookId;
@@ -6,6 +7,8 @@ export default class Chapter extends baseEntity {
     title;
     summary;
     index;
+
+    entityType = CHAPTER_ENTITY;
 
     constructor(bookId, chapterId, number, title, summary, chapterIndex) {
         super(chapterId);
