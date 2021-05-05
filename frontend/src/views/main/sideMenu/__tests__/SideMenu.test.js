@@ -1,9 +1,9 @@
 import React from "react";
-import { fireEvent, render, screen, within } from "../../../utils/TestUtils";
+import { fireEvent, render, screen, within } from "../../../../utils/TestUtils";
 import { NAVIGATION } from "../navigation";
 import SideMenu from "../SideMenu";
 import { useSelector } from "react-redux";
-import { setSelectedNavigation } from "../../../actions/NavigationAction";
+import { setSelectedNavigation } from "../../../../actions/NavigationAction";
 
 const mockDispatch = jest.fn();
 jest.mock("react-redux", () => ({

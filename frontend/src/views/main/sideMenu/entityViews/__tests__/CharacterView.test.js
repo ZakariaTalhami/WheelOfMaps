@@ -1,9 +1,9 @@
 // Core
 import React from "react";
 // Libs
-import { render, screen, within } from "../../../../utils/TestUtils";
+import { render, screen, within } from "../../../../../utils/TestUtils";
 // Mocks
-import mockCharacter from "../../../../models/mocks/mockCharacter";
+import mockCharacter from "../../../../../models/mocks/mockCharacter";
 // Tested Component
 import CharacterView from "../CharacterView";
 

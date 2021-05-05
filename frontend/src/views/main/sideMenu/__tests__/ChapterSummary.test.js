@@ -1,14 +1,14 @@
 // Libs
-import { render, screen } from "../../../utils/TestUtils";
+import { render, screen } from "../../../../utils/TestUtils";
 // Tested component
 import ChapterSummary from "../ChapterSummary";
 // Mocks
-import useGetSelectedChapter from "../../../hooks/useGetSelectedChapter";
-import mockChapter from "../../../models/mocks/mockChapter";
+import useGetSelectedChapter from "../../../../hooks/useGetSelectedChapter";
+import mockChapter from "../../../../models/mocks/mockChapter";
 // Utils
-import { getChapterTitle } from "../../../utils/BookUtils";
+import { getChapterTitle } from "../../../../utils/BookUtils";
 
-jest.mock("../../../hooks/useGetSelectedChapter");
+jest.mock("../../../../hooks/useGetSelectedChapter");
 
 describe("Selected Chapter is undefined", () => {
     beforeEach(() => {

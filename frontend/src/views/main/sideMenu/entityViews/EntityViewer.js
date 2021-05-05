@@ -4,14 +4,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 // Utils
 import _ from "lodash";
-// Models
-import Location from "../../../models/location";
-import Character from "../../../models/character";
 // Components
 import { Center, Heading } from "@chakra-ui/react";
 import LocationView from "./LocationView";
 import CharacterView from "./CharacterView";
-import { CHARACTER_ENTITY, LOCATION_ENTITY } from "../../../models/entityTypes";
+import {
+    CHARACTER_ENTITY,
+    LOCATION_ENTITY,
+} from "../../../../models/entityTypes";
 
 export const NO_SELECTION_MESSAGE = "Nothing Selected";
 

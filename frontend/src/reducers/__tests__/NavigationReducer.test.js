@@ -1,5 +1,5 @@
 import { NAV_ENTITY_SELECTED, NAV_SELECTED } from "../../actions/types";
-import { SELECTED_SUMMARY } from "../../components/sideMenu/navigation";
+import { SELECTED_SUMMARY } from "../../views/main/sideMenu/navigation";
 import NavigationReducer from "../NavigationReducer";
 
 test("Retuns the initial state", () => {

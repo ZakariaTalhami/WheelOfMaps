@@ -1,5 +1,5 @@
 import React from "react";
-import SideMenu from "../../components/sideMenu/SideMenu";
+import SideMenu from "./sideMenu/SideMenu";
 import classes from "./Main.module.scss";
 import Timeline from "./timeline/Timeline";
 import { ReactComponent as WotIcon } from "../../assets/icons/Wheel-icon.svg";
