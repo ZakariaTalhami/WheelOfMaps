@@ -2,6 +2,8 @@
     Uility module for common functionality for Books and chapters.
 */
 
+import Book from "../models/book";
+
 /**
  * Get the formated chapter title
  * @param {Chapter} chapter
@@ -42,4 +44,11 @@ export const isInChapterRange = (chapter, range) => {
         return points[0] === chapter;
     }
     return inRange;
+};
+
+export const createEmptyWoTBook = () => {
+    return Book.ConstructFromObject({
+        series: "Wheel of time",
+        author: "Robort Jordan",
+    });
 };

@@ -10,7 +10,7 @@ const CreditLink = ({ author, link }) => (
         textAlign="end"
         fontWeight="bold"
         fontStyle="italic"
-        color="#574937"
+        color="secondaryColor"
         href={link}
         isExternal
     >
