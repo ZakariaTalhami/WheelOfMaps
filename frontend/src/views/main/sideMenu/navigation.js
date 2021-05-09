@@ -33,13 +33,13 @@ const getDevNavigation = () => {
                 name: BOOK_FORM,
                 label: "Book Form",
                 Icon: FaBookMedical,
-                Content: ChapterForm,
+                Content: BookForm,
             },
             {
                 name: CHAPTER_FORM,
                 label: "Chapter Form",
                 Icon: FaBookOpen,
-                Content: BookForm,
+                Content: ChapterForm,
             },
         ];
     }

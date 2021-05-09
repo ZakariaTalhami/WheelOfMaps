@@ -51,6 +51,16 @@ export default class Book extends baseEntity {
         );
     }
 
+    getPublishDate() {
+        let parsedDate = "";
+
+        if (this.publishDate) {
+            parsedDate = this.publishDate.split("T")[0];
+        }
+
+        return parsedDate;
+    }
+
     setTitle(title) {
         this.title = title;
         this.setDirty();
