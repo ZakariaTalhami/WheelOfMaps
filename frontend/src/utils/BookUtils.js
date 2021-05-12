@@ -3,6 +3,7 @@
 */
 
 import Book from "../models/book";
+import Chapter from "../models/chapter";
 
 /**
  * Get the formated chapter title
@@ -51,4 +52,8 @@ export const createEmptyWoTBook = () => {
         series: "Wheel of time",
         author: "Robort Jordan",
     });
+};
+
+export const createEmptyWoTChapter = (bookId) => {
+    return Chapter.ConstructFromObject(bookId, {});
 };

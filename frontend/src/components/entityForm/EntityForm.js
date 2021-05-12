@@ -8,6 +8,7 @@ import {
     FormControl,
     Input,
     FormLabel,
+    Textarea,
 } from "@chakra-ui/react";
 import React from "react";
 import { FaTrash } from "react-icons/fa";
@@ -90,6 +91,18 @@ export const EntityFormField = (props) => (
     <FormControl>
         <FormLabel>{props.title}</FormLabel>
         <Input
+            variant="cat"
+            border="2px solid black"
+            borderColor="secondaryColor"
+            {...props}
+        />
+    </FormControl>
+);
+
+export const EntityFormTextArea = (props) => (
+    <FormControl>
+        <FormLabel>{props.title}</FormLabel>
+        <Textarea
             variant="pizza"
             border="2px solid black"
             borderColor="secondaryColor"

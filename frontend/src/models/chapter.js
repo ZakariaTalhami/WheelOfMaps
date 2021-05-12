@@ -10,7 +10,7 @@ export default class Chapter extends baseEntity {
 
     entityType = CHAPTER_ENTITY;
 
-    constructor(bookId, chapterId, number, title, summary, chapterIndex) {
+    constructor(bookId, chapterId, number, title, summary = {}, chapterIndex) {
         super(chapterId);
         this.#bookId = bookId;
         this.number = number;
@@ -45,8 +45,17 @@ export default class Chapter extends baseEntity {
         this.setDirty();
     }
 
-    setSummary(summary) {
-        this.summary = summary;
+    setSummaryBody(summary) {
+        this.summary.body = summary;
+        this.setDirty();
+    }
+
+    setSummaryAuthor(author) {
+        this.summary.author = author;
+        this.setDirty();
+    }
+    setSummaryLink(link) {
+        this.summary.link = link;
         this.setDirty();
     }
 
