@@ -28,9 +28,11 @@ const extendedTheme = extendTheme({
         Input: {
             variants: {
                 filled: {
-                    backgroundColor: "green",
-                    _focused: {
+                    field: {
                         backgroundColor: "white",
+                        _focus: {
+                            backgroundColor: "white",
+                        },
                     },
                 },
             },

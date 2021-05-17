@@ -17,7 +17,7 @@ import BookForm from "./developementEditor/EntityForms/BookForm";
 export const CHAPTER_FORM = "chapter-form";
 export const BOOK_FORM = "book-form";
 export const SELECTED_FORM = "selected-form";
- 
+
 const getDevNavigation = () => {
     let devNavigation = [];
 

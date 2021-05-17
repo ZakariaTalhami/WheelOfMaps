@@ -1,3 +1,6 @@
+// Core
+import React from "react";
+// Components
 import {
     Button,
     Heading,
@@ -8,8 +11,8 @@ import {
     FormControl,
     Input,
     FormLabel,
+    Textarea,
 } from "@chakra-ui/react";
-import React from "react";
 import { FaTrash } from "react-icons/fa";
 
 export const ActionButton = ({ iconComp, ...props }) => {
@@ -90,7 +93,19 @@ export const EntityFormField = (props) => (
     <FormControl>
         <FormLabel>{props.title}</FormLabel>
         <Input
-            variant="pizza"
+            variant="filled"
+            border="2px solid black"
+            borderColor="secondaryColor"
+            {...props}
+        />
+    </FormControl>
+);
+
+export const EntityFormTextArea = (props) => (
+    <FormControl>
+        <FormLabel>{props.title}</FormLabel>
+        <Textarea
+            variant="filled"
             border="2px solid black"
             borderColor="secondaryColor"
             {...props}

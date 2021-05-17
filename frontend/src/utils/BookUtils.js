@@ -3,6 +3,7 @@
 */
 
 import Book from "../models/book";
+import Chapter from "../models/chapter";
 
 /**
  * Get the formated chapter title
@@ -46,9 +47,25 @@ export const isInChapterRange = (chapter, range) => {
     return inRange;
 };
 
+/**
+ * Construct a wheel of time book.
+ * Predefined values:
+ *      series = "Wheel of time"
+ *      authro = "Robort Jordan"
+ * @returns {Object} - Wheel of time Book
+ */
 export const createEmptyWoTBook = () => {
     return Book.ConstructFromObject({
         series: "Wheel of time",
         author: "Robort Jordan",
     });
+};
+
+/**
+ * Construct an empty wheel of time chapter
+ * @param {Number} bookId - book id
+ * @returns {Object} - Wheel of time Chapter
+ */
+export const createEmptyWoTChapter = (bookId) => {
+    return Chapter.ConstructFromObject(bookId, {});
 };
