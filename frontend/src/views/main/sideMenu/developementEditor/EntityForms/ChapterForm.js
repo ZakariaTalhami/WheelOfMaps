@@ -17,9 +17,14 @@ import {
 import useGetSelectedBook from "../../../../../hooks/useGetSelectedBook";
 import useGetSelectedChapter from "../../../../../hooks/useGetSelectedChapter";
 // Utils
-import { createEmptyWoTChapter } from "../../../../../utils/BookUtils";
+import {
+    constructChapterIndex,
+    createEmptyWoTChapter,
+} from "../../../../../utils/BookUtils";
 // Models
 import Chapter from "../../../../../models/chapter";
+import { useDispatch } from "react-redux";
+import { saveBook } from "../../../../../actions/BookActions";
 
 const ChapterForm = () => {
     const [editMode, setEditMode] = useState(false);
@@ -28,13 +33,21 @@ const ChapterForm = () => {
     const selectedBook = useGetSelectedBook();
     const title = editMode ? "Edit Chapter" : "Create Chapter";
 
+    const dispatch = useDispatch();
+
+    // When selected chapter or book is changed,
+    // Reset the edit mode.
+    useEffect(() => {
+        setEditMode(false);
+    }, [selectedBook, selectedChapter]);
+
     useEffect(() => {
         setFormObject(
             editMode
                 ? Chapter.ConstructFromObject(selectedBook._id, selectedChapter)
                 : createEmptyWoTChapter()
         );
-    }, [editMode, selectedBook, selectedChapter]);
+    }, [editMode]);
 
     const onEditToggled = () => setEditMode(!editMode);
 
@@ -45,6 +58,17 @@ const ChapterForm = () => {
         );
         modifiedChapter[e.target.name](e.target.value);
         setFormObject(modifiedChapter);
+    };
+
+    const onDeleteChapter = () => {
+        dispatch(saveBook(selectedChapter.delete()));
+    };
+
+    const onSave = (e) => {
+        formObject.setIndex(
+            constructChapterIndex(selectedBook.seriesIndex, formObject.number)
+        );
+        dispatch(saveBook(formObject.save()));
     };
 
     const numberValue =
@@ -60,10 +84,14 @@ const ChapterForm = () => {
                 <ActionToggleButton
                     toggled={editMode}
                     onClick={onEditToggled}
-                    isDisabled={!selectedChapter}
                     iconComp={FaPen}
+                    isDisabled={!selectedChapter}
                 />
-                <ActionButton iconComp={FaTrash} />
+                <ActionButton
+                    onClick={onDeleteChapter}
+                    iconComp={FaTrash}
+                    isDisabled={!selectedChapter}
+                />
             </ActionBar>
             <FormHeader title={title} />
             <FormBody spacing="1.5rem">
@@ -104,7 +132,7 @@ const ChapterForm = () => {
                     onChange={onFormChange}
                 />
             </FormBody>
-            <FormFooterActions />
+            <FormFooterActions onSave={onSave} />
         </EntitFormWrapper>
     );
 };

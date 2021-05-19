@@ -34,3 +34,17 @@ export const loadBooks = () => (dispatch) => {
             });
         });
 };
+
+export const saveBook = (promise) => (dispatch) => {
+    return promise
+        .then((res) => res.data)
+        .then(() => {
+            alert("Changes saved successfully");
+            dispatch(loadBooks());
+        })
+        .catch((err) => {
+            console.error("Failed to save Book");
+            alert("Failed to save changes");
+            console.error(err);
+        });
+};

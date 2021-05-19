@@ -2,6 +2,7 @@
     Uility module for common functionality for Books and chapters.
 */
 
+import { zeroPad } from "../utils/NumberUtils";
 import Book from "../models/book";
 import Chapter from "../models/chapter";
 
@@ -23,7 +24,7 @@ export const getChapterTitle = (chapter) => {
 };
 
 export const getBookChapterTitles = (book) => {
-    const chapters = book.chapters || [];
+    const chapters = book?.chapters || [];
     return chapters.map(getChapterTitle);
 };
 
@@ -45,6 +46,17 @@ export const isInChapterRange = (chapter, range) => {
         return points[0] === chapter;
     }
     return inRange;
+};
+
+/**
+ * Construct the chapter index for a given chapter
+ *
+ * @param {Number} bookNumber book number in the series
+ * @param {Number} chapterNumber  chapter number in the book
+ * @returns {Number} chapter index
+ */
+export const constructChapterIndex = (bookNumber, chapterNumber) => {
+    return `${zeroPad(bookNumber, 2)}${zeroPad(chapterNumber, 3)}`;
 };
 
 /**

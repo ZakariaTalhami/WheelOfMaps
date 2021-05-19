@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 // Component
 import { FaTrash, FaPen } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { saveBook } from "../../../../../actions/BookActions";
 import {
     ActionBar,
     ActionButton,
@@ -24,13 +26,21 @@ const BookForm = () => {
     const selectedBook = useGetSelectedBook();
     const title = editMode ? "Edit Book" : "Create Book";
 
+    const dispatch = useDispatch();
+
+    // When selected book is changed,
+    // Reset the edit mode.
+    useEffect(() => {
+        setEditMode(false);
+    }, [selectedBook]);
+
     useEffect(() => {
         setFormObject(
             editMode
                 ? Book.ConstructFromObject(selectedBook)
                 : createEmptyWoTBook()
         );
-    }, [editMode, selectedBook]);
+    }, [editMode]);
 
     const onEditToggled = () => setEditMode(!editMode);
 
@@ -38,6 +48,14 @@ const BookForm = () => {
         const modifiedBook = Book.ConstructFromObject(formObject);
         modifiedBook[e.target.name](e.target.value);
         setFormObject(modifiedBook);
+    };
+
+    const onDeleteBook = () => {
+        dispatch(saveBook(selectedBook.delete()));
+    };
+
+    const onSave = (e) => {
+        dispatch(saveBook(formObject.save()));
     };
 
     const titleValue = formObject?.title || "";
@@ -49,11 +67,16 @@ const BookForm = () => {
         <EntitFormWrapper data-testid="book-form">
             <ActionBar actions={[]}>
                 <ActionToggleButton
+                    title="Edit"
                     toggled={editMode}
                     onClick={onEditToggled}
                     iconComp={FaPen}
                 />
-                <ActionButton iconComp={FaTrash} />
+                <ActionButton
+                    title="Delete"
+                    onClick={onDeleteBook}
+                    iconComp={FaTrash}
+                />
             </ActionBar>
             <FormHeader title={title} />
             <FormBody spacing="1.5rem">
@@ -79,7 +102,7 @@ const BookForm = () => {
                     onChange={onFormChange}
                 />
             </FormBody>
-            <FormFooterActions />
+            <FormFooterActions onSave={onSave} />
         </EntitFormWrapper>
     );
 };

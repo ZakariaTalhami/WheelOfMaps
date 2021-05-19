@@ -18,9 +18,10 @@ const MOCK_STATE = {
         selectedChapter: mockChapter.number,
     },
 };
-
+const mockDispatch = jest.fn();
 jest.mock("react-redux", () => ({
     useSelector: jest.fn(),
+    useDispatch: () => mockDispatch,
 }));
 
 beforeEach(() => {

@@ -86,6 +86,12 @@ export default class Book extends baseEntity {
         this.setDirty();
     }
 
+    serialize() {
+        const obj = super.serialize();
+        obj.chapters = obj.chapters.map((chapter) => chapter.serialize());
+        return obj;
+    }
+
     getUrl() {
         return `book`;
     }

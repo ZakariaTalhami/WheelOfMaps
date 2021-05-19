@@ -13,7 +13,7 @@ const ChapterSchema = new Schema({
         type: Object,
         default: "",
     },
-    chapterIndex: {
+    index: {
         type: String,
     },
 });
@@ -21,10 +21,7 @@ const ChapterSchema = new Schema({
 // TODO: Check why this is not triggered
 ChapterSchema.pre("save", function (next) {
     const book = this.parent();
-    this.chapterIndex = `${zeroPad(book.seriesIndex, 2)}${zeroPad(
-        this.number,
-        3
-    )}`;
+    this.index = `${zeroPad(book.seriesIndex, 2)}${zeroPad(this.number, 3)}`;
     next();
 });
 

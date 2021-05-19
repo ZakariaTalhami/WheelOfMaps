@@ -66,11 +66,24 @@ export default class baseEntity {
     }
 
     /**
+     * Delete the entity from the backend
+     * @returns {Promise} - http response from delete.
+     */
+    delete() {
+        if (!this.isNew()) {
+            const url = this.getUrl();
+            return axios.delete(`${url}/${this._id}`);
+        }
+    }
+
+    /**
      *  Converts the entity object to json string
      *  @returns {string} - entity as json
      */
     serialize() {
-        return JSON.stringify(this);
+        const obj = Object.assign({}, this);
+        delete obj.entityType;
+        return obj;
     }
 
     /**

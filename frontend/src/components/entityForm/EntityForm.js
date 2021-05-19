@@ -93,6 +93,7 @@ export const EntityFormField = (props) => (
     <FormControl>
         <FormLabel>{props.title}</FormLabel>
         <Input
+            role="field"
             variant="filled"
             border="2px solid black"
             borderColor="secondaryColor"

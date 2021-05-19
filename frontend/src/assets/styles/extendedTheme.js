@@ -25,6 +25,16 @@ const extendedTheme = extendTheme({
         },
     },
     components: {
+        Textarea: {
+            variants: {
+                filled: {
+                    backgroundColor: "white",
+                    _focus: {
+                        backgroundColor: "white",
+                    },
+                },
+            },
+        },
         Input: {
             variants: {
                 filled: {

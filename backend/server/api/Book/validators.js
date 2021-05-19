@@ -4,11 +4,16 @@ import { celebrate, Joi } from "celebrate";
 const chapterValidationObj = Joi.object({
     // TODO: When the Prologue is handled this
     // should be a set with min of 1
+    _id: Joi.string(),
     number: Joi.number().integer().required(),
     title: Joi.string().required(),
-    summary: Joi.string(),
+    summary: Joi.object({
+        body: Joi.string().required(),
+        author: Joi.string().required(),
+        link: Joi.string().required(),
+    }),
     // TODO: this shouldnt be set by the user
-    chapterIndex: Joi.string().required(),
+    index: Joi.string().required(),
 });
 
 export const chapterValidationMiddleware = celebrate({
@@ -17,6 +22,7 @@ export const chapterValidationMiddleware = celebrate({
 
 export const bookValidationMiddleware = celebrate({
     body: Joi.object({
+        _id: Joi.string(),
         title: Joi.string().required(),
         series: Joi.string().required(),
         seriesIndex: Joi.number().integer().min(0).required(),
