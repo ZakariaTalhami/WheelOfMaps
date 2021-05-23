@@ -13,7 +13,7 @@ const ChapterSchema = new Schema({
         type: Object,
         default: "",
     },
-    chapterIndex: {
+    index: {
         type: String,
     },
 });
@@ -21,10 +21,7 @@ const ChapterSchema = new Schema({
 // TODO: Check why this is not triggered
 ChapterSchema.pre("save", function (next) {
     const book = this.parent();
-    this.chapterIndex = `${zeroPad(book.seriesIndex, 2)}${zeroPad(
-        this.number,
-        3
-    )}`;
+    this.index = `${zeroPad(book.seriesIndex, 2)}${zeroPad(this.number, 3)}`;
     next();
 });
 
@@ -50,6 +47,10 @@ const BookSchema = new Schema({
         type: Date,
         required: true,
     },
+    enabled: {
+        type: Boolean,
+        default: true,
+    },
     chapters: {
         type: [ChapterSchema],
         default: [],
@@ -58,14 +59,6 @@ const BookSchema = new Schema({
 
 // Series and SeriesIndex need to be unique
 BookSchema.index({ series: 1, seriesIndex: 1 }, { unique: true });
-
-BookSchema.statics.AddChapter = function (bookId, chapter) {
-    return this.findOneAndUpdate(
-        { _id: bookId },
-        { $push: { chapters: chapter } },
-        { new: true }
-    );
-};
 
 const Book = model("Book", BookSchema);
 const Chapter = model("Chapter", ChapterSchema);

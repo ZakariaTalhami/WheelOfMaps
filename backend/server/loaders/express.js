@@ -17,11 +17,19 @@ export default async ({ app }) => {
     app.use(bodyParser.json());
     app.use(express.static(path.join(__dirname, "../../public")));
 
-    // Host the frontend in production
     if (process.env.NODE_ENV === "production") {
+        // Host the frontend in production
         app.use(
             express.static(path.join(__dirname, "../../../frontend/build"))
         );
+
+        // Block CRUD API's except read in production
+        app.use((req, res, next) => {
+            if (req.method !== "GET") {
+                next(createError(404));
+            }
+            next();
+        });
     }
 
     //  Include the router

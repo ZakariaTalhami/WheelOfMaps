@@ -1,5 +1,6 @@
 import baseEntity from "./baseEntity";
 import Chapter from "./chapter";
+import { BOOK_ENTITY } from "./entityTypes";
 
 export default class Book extends baseEntity {
     title;
@@ -8,6 +9,8 @@ export default class Book extends baseEntity {
     author;
     publishDate;
     chapters;
+
+    entityType = BOOK_ENTITY;
 
     constructor(
         bookId,
@@ -48,6 +51,16 @@ export default class Book extends baseEntity {
         );
     }
 
+    getPublishDate() {
+        let parsedDate = "";
+
+        if (this.publishDate) {
+            parsedDate = this.publishDate.split("T")[0];
+        }
+
+        return parsedDate;
+    }
+
     setTitle(title) {
         this.title = title;
         this.setDirty();
@@ -71,6 +84,12 @@ export default class Book extends baseEntity {
     setPublishDate(date) {
         this.publishDate = date;
         this.setDirty();
+    }
+
+    serialize() {
+        const obj = super.serialize();
+        obj.chapters = obj.chapters.map((chapter) => chapter.serialize());
+        return obj;
     }
 
     getUrl() {

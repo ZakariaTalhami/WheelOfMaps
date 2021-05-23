@@ -1,4 +1,8 @@
-import { getBookChapterTitles, isInChapterRange } from "../BookUtils";
+import {
+    getBookChapterTitles,
+    isInChapterRange,
+    constructChapterIndex,
+} from "../BookUtils";
 
 describe("getBookChapterTitles", () => {
     test("return empty list with no chapters", () => {
@@ -49,4 +53,11 @@ describe("isInChapterRange", () => {
     test("multi chapter range - in range", () => {
         expect(isInChapterRange("01013", "01010-01015")).toEqual(true);
     });
+});
+
+test("constructChapterIndex", () => {
+    expect(constructChapterIndex(1, 2)).toEqual("01002");
+    expect(constructChapterIndex(10, 2)).toEqual("10002");
+    expect(constructChapterIndex(1, 20)).toEqual("01020");
+    expect(constructChapterIndex(1, 200)).toEqual("01200");
 });

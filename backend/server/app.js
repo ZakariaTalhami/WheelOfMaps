@@ -12,21 +12,20 @@ const debug = debugLib("backend:server");
 const PORT = normalizePort(process.env.PORT || "8000");
 
 async function startserver() {
-  const app = express();
-  app.set("port", PORT);
+    const app = express();
+    app.set("port", PORT);
 
-  await loaders({ expressApp: app });
-  // console.log(app._router.stack);
-  const server = http.createServer(app);
+    await loaders({ expressApp: app });
+    const server = http.createServer(app);
 
-  server.listen(PORT);
-  server.on("error", onError);
-  server.on("listening", () => {
-    const addr = server.address();
-    const bind =
-      typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
-    debug(`Listening on ${bind}`);
-  });
+    server.listen(PORT);
+    server.on("error", onError);
+    server.on("listening", () => {
+        const addr = server.address();
+        const bind =
+            typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
+        debug(`Listening on ${bind}`);
+    });
 }
 
 /**
@@ -34,19 +33,19 @@ async function startserver() {
  */
 
 function normalizePort(val) {
-  const port = parseInt(val, 10);
+    const port = parseInt(val, 10);
 
-  if (Number.isNaN(port)) {
-    // named pipe
-    return val;
-  }
+    if (Number.isNaN(port)) {
+        // named pipe
+        return val;
+    }
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+    if (port >= 0) {
+        // port number
+        return port;
+    }
 
-  return false;
+    return false;
 }
 
 /**
@@ -54,25 +53,25 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== "listen") {
-    throw error;
-  }
+    if (error.syscall !== "listen") {
+        throw error;
+    }
 
-  const bind = typeof PORT === "string" ? `Pipe ${PORT}` : `Port ${PORT}`;
+    const bind = typeof PORT === "string" ? `Pipe ${PORT}` : `Port ${PORT}`;
 
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case "EACCES":
-      console.error(`${bind} requires elevated privileges`);
-      process.exit(1);
-      break;
-    case "EADDRINUSE":
-      console.error(`${bind}  is already in use`);
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case "EACCES":
+            console.error(`${bind} requires elevated privileges`);
+            process.exit(1);
+            break;
+        case "EADDRINUSE":
+            console.error(`${bind}  is already in use`);
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
 }
 
 /**

@@ -38,41 +38,66 @@ test("getUrl throws error not implemented", () => {
 });
 
 test("serialization", () => {
-    expect(entity.serialize()).toStrictEqual(`{"_id":"${MOCK_ID}"}`);
+    expect(entity.serialize()).toStrictEqual({ _id: `${MOCK_ID}` });
 });
 
-test("dirty save serializes the object and performs a PUT request", () => {
-    jest.spyOn(entity, "isDirty").mockReturnValue(true);
-    jest.spyOn(entity, "getUrl").mockReturnValue("path/to/entity");
-    jest.spyOn(entity, "serialize").mockReturnValue("{entity}");
+describe("Saving entity", () => {
+    beforeEach(() => {
+        jest.spyOn(entity, "getUrl").mockReturnValue("path/to/entity");
+        jest.spyOn(entity, "serialize").mockReturnValue("{entity}");
+    });
 
-    entity.save();
+    test("dirty save serializes the object and performs a PUT request", () => {
+        jest.spyOn(entity, "isDirty").mockReturnValue(true);
 
-    expect(entity.getUrl).toHaveBeenCalled();
-    expect(entity.serialize).toHaveBeenCalled();
-    expect(axios.put).toHaveBeenCalledWith(
-        "path/to/entity/" + MOCK_ID,
-        "{entity}"
-    );
+        entity.save();
+
+        expect(entity.getUrl).toHaveBeenCalled();
+        expect(entity.serialize).toHaveBeenCalled();
+        expect(axios.put).toHaveBeenCalledWith(
+            "path/to/entity/" + MOCK_ID,
+            "{entity}"
+        );
+    });
+
+    test("new save serializes the object and performs a POST request", () => {
+        jest.spyOn(entity, "isNew").mockReturnValue(true);
+
+        entity.save();
+
+        expect(entity.getUrl).toHaveBeenCalled();
+        expect(entity.serialize).toHaveBeenCalled();
+        expect(axios.post).toHaveBeenCalledWith("path/to/entity", "{entity}");
+    });
+
+    test("clean save does not send request", () => {
+        entity.save();
+
+        expect(axios.post).not.toHaveBeenCalled();
+        expect(axios.put).not.toHaveBeenCalled();
+    });
 });
 
-test("new save serializes the object and performs a POST request", () => {
-    jest.spyOn(entity, "isNew").mockReturnValue(true);
-    jest.spyOn(entity, "getUrl").mockReturnValue("path/to/entity");
-    jest.spyOn(entity, "serialize").mockReturnValue("{entity}");
+describe("Delete entity", () => {
+    beforeEach(() => {
+        jest.spyOn(entity, "getUrl").mockReturnValue("path/to/entity");
+    });
 
-    entity.save();
+    test("Deletion ignored if new entity", () => {
+        jest.spyOn(entity, "isNew").mockReturnValue(true);
 
-    expect(entity.getUrl).toHaveBeenCalled();
-    expect(entity.serialize).toHaveBeenCalled();
-    expect(axios.post).toHaveBeenCalledWith("path/to/entity", "{entity}");
-});
+        entity.delete();
 
-test("clean save does not send request", () => {
-    jest.spyOn(entity, "getUrl").mockReturnValue("path/to/entity");
+        expect(entity.getUrl).not.toHaveBeenCalled();
+        expect(axios.delete).not.toHaveBeenCalled();
+    });
 
-    entity.save();
+    test("Deletion is performed for non-new entity", () => {
+        jest.spyOn(entity, "isNew").mockReturnValue(false);
 
-    expect(axios.post).not.toHaveBeenCalled();
-    expect(axios.put).not.toHaveBeenCalled();
+        entity.delete();
+
+        expect(entity.getUrl).toHaveBeenCalled();
+        expect(axios.delete).toHaveBeenCalledWith("path/to/entity/" + MOCK_ID);
+    });
 });

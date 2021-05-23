@@ -1,4 +1,5 @@
 import baseEntity from "./baseEntity";
+import { CHAPTER_ENTITY } from "./entityTypes";
 
 export default class Chapter extends baseEntity {
     #bookId;
@@ -7,7 +8,9 @@ export default class Chapter extends baseEntity {
     summary;
     index;
 
-    constructor(bookId, chapterId, number, title, summary, chapterIndex) {
+    entityType = CHAPTER_ENTITY;
+
+    constructor(bookId, chapterId, number, title, summary = {}, chapterIndex) {
         super(chapterId);
         this.#bookId = bookId;
         this.number = number;
@@ -24,7 +27,7 @@ export default class Chapter extends baseEntity {
             chapterObj.title,
             // TODO: Create a model for summary
             chapterObj.summary,
-            chapterObj.chapterIndex
+            chapterObj.chapterIndex || chapterObj.index
         );
     }
 
@@ -42,8 +45,17 @@ export default class Chapter extends baseEntity {
         this.setDirty();
     }
 
-    setSummary(summary) {
-        this.summary = summary;
+    setSummaryBody(summary) {
+        this.summary.body = summary;
+        this.setDirty();
+    }
+
+    setSummaryAuthor(author) {
+        this.summary.author = author;
+        this.setDirty();
+    }
+    setSummaryLink(link) {
+        this.summary.link = link;
         this.setDirty();
     }
 

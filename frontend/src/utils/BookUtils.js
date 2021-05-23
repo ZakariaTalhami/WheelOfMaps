@@ -2,6 +2,10 @@
     Uility module for common functionality for Books and chapters.
 */
 
+import { zeroPad } from "../utils/NumberUtils";
+import Book from "../models/book";
+import Chapter from "../models/chapter";
+
 /**
  * Get the formated chapter title
  * @param {Chapter} chapter
@@ -20,7 +24,7 @@ export const getChapterTitle = (chapter) => {
 };
 
 export const getBookChapterTitles = (book) => {
-    const chapters = book.chapters || [];
+    const chapters = book?.chapters || [];
     return chapters.map(getChapterTitle);
 };
 
@@ -42,4 +46,38 @@ export const isInChapterRange = (chapter, range) => {
         return points[0] === chapter;
     }
     return inRange;
+};
+
+/**
+ * Construct the chapter index for a given chapter
+ *
+ * @param {Number} bookNumber book number in the series
+ * @param {Number} chapterNumber  chapter number in the book
+ * @returns {Number} chapter index
+ */
+export const constructChapterIndex = (bookNumber, chapterNumber) => {
+    return `${zeroPad(bookNumber, 2)}${zeroPad(chapterNumber, 3)}`;
+};
+
+/**
+ * Construct a wheel of time book.
+ * Predefined values:
+ *      series = "Wheel of time"
+ *      authro = "Robort Jordan"
+ * @returns {Object} - Wheel of time Book
+ */
+export const createEmptyWoTBook = () => {
+    return Book.ConstructFromObject({
+        series: "Wheel of time",
+        author: "Robort Jordan",
+    });
+};
+
+/**
+ * Construct an empty wheel of time chapter
+ * @param {Number} bookId - book id
+ * @returns {Object} - Wheel of time Chapter
+ */
+export const createEmptyWoTChapter = (bookId) => {
+    return Chapter.ConstructFromObject(bookId, {});
 };
