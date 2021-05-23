@@ -208,7 +208,7 @@ const BookReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 books: bookMapping,
-                selectedBook: firstBook,
+                selectedBook: action.selection || firstBook,
                 selectedChapter: firstChapter?.number,
                 selectedChapterIndex: firstChapter?.index,
             };

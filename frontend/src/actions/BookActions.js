@@ -23,24 +23,25 @@ export const setSelectedChapter = (chapterIndex) => ({
 });
 
 // TODO: handle error responses
-export const loadBooks = () => (dispatch) => {
+export const loadBooks = (defaultSelection) => (dispatch) => {
     return axios
         .get("book")
         .then((res) => res.data)
         .then((data) => {
             dispatch({
                 type: BOOKS_LOADED,
+                selection: defaultSelection,
                 books: data,
             });
         });
 };
 
-export const saveBook = (promise) => (dispatch) => {
+export const saveBook = (promise, bookSelection) => (dispatch) => {
     return promise
         .then((res) => res.data)
         .then(() => {
             alert("Changes saved successfully");
-            dispatch(loadBooks());
+            dispatch(loadBooks(bookSelection));
         })
         .catch((err) => {
             console.error("Failed to save Book");

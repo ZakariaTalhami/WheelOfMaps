@@ -25,6 +25,7 @@ import {
 import Chapter from "../../../../../models/chapter";
 import { useDispatch } from "react-redux";
 import { saveBook } from "../../../../../actions/BookActions";
+import { formatSummary } from "../../../../../utils/TextUtils";
 
 const ChapterForm = () => {
     const [editMode, setEditMode] = useState(false);
@@ -61,14 +62,17 @@ const ChapterForm = () => {
     };
 
     const onDeleteChapter = () => {
-        dispatch(saveBook(selectedChapter.delete()));
+        dispatch(saveBook(selectedChapter.delete(), selectedBook.title));
     };
 
     const onSave = (e) => {
+        // Set chapter index
         formObject.setIndex(
             constructChapterIndex(selectedBook.seriesIndex, formObject.number)
         );
-        dispatch(saveBook(formObject.save()));
+        // Format Summary
+        formObject.summary.body = formatSummary(formObject.summary.body);
+        dispatch(saveBook(formObject.save(), selectedBook.title));
     };
 
     const numberValue =

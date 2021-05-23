@@ -55,7 +55,7 @@ const BookForm = () => {
     };
 
     const onSave = (e) => {
-        dispatch(saveBook(formObject.save()));
+        dispatch(saveBook(formObject.save(), formObject.title));
     };
 
     const titleValue = formObject?.title || "";

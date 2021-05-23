@@ -18,3 +18,16 @@ export const getSummaryParagraphs = (summary) => {
         </Text>
     ));
 };
+
+/**
+ * Split the summary by new line and wrap in paragraphs
+ * @param {String} summary - summary text
+ * @returns {String} formated summary
+ */
+export const formatSummary = (summary) => {
+    if (summary) {
+        const newline = String.fromCharCode(13, 10, 13, 10);
+        summary = summary.replaceAll(/((?<!\r)\n)/g, newline);
+    }
+    return summary;
+};

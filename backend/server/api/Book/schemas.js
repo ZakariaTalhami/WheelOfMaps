@@ -47,6 +47,10 @@ const BookSchema = new Schema({
         type: Date,
         required: true,
     },
+    enabled: {
+        type: Boolean,
+        default: true,
+    },
     chapters: {
         type: [ChapterSchema],
         default: [],

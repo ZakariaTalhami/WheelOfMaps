@@ -1,8 +1,11 @@
 import { Book } from "./schemas";
 
 export default class BookService {
-    static async all(query) {
-        return await Book.find(query).sort({ seriesIndex: 1 });
+    static async all(query = {}) {
+        console.log(query);
+        return await Book.find({ enabled: true, ...query }).sort({
+            seriesIndex: 1,
+        });
     }
 
     static async create(bookDto) {

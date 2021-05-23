@@ -28,6 +28,7 @@ export const bookValidationMiddleware = celebrate({
         seriesIndex: Joi.number().integer().min(0).required(),
         author: Joi.string().required(),
         publishDate: Joi.date().required(),
+        enabled: Joi.bool(),
         chapters: Joi.array().items(chapterValidationObj),
     }),
 });
