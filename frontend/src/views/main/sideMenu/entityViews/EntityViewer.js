@@ -24,7 +24,7 @@ const EntityViewer = () => {
     const selectedEntity = useSelector(
         (state) => state.Navigation.selectedEntity
     );
-    console.log(selectedEntity);
+
     return (
         <EntityViewFactory
             componentMap={EntityComponentMap}
